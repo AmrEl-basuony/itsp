@@ -22,7 +22,7 @@ class GradientCategoryCard extends StatelessWidget {
         margin: margin,
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,7 +32,7 @@ class GradientCategoryCard extends StatelessWidget {
                   Flexible(
                     child: Text(
                       text,
-                      style: medium13,
+                      style: medium11,
                       maxLines: 2,
                       softWrap: true,
                     ),

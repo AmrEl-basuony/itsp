@@ -4,11 +4,11 @@ import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/core/theming/themes.dart';
-import 'package:itsp/features/2/presentation/screens/categories_screen.dart';
 import 'package:itsp/features/2/presentation/screens/contact_screen.dart';
 import 'package:itsp/features/2/presentation/screens/home_screen.dart';
 import 'package:itsp/features/2/presentation/screens/portfolio_screen.dart';
 import 'package:itsp/features/2/presentation/screens/reels_screen.dart';
+import 'package:itsp/features/recruitment/screens/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class MainLayoutScreen extends StatelessWidget {
@@ -39,13 +39,6 @@ class MainLayoutScreen extends StatelessWidget {
           inactiveColorPrimary: darkModeColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.category_outlined),
-          title: "Categories",
-          iconSize: 32,
-          activeColorPrimary: navBarActiveItemColor,
-          inactiveColorPrimary: darkModeColor,
-        ),
-        PersistentBottomNavBarItem(
           icon: const Icon(Icons.folder_outlined),
           title: "Portfolio",
           iconSize: 32,
@@ -66,13 +59,20 @@ class MainLayoutScreen extends StatelessWidget {
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.person_outline),
+          title: "Profile",
+          iconSize: 32,
+          activeColorPrimary: navBarActiveItemColor,
+          inactiveColorPrimary: darkModeColor,
+        ),
       ],
       screens: const [
         HomeScreen(),
-        CategoriesScreen(),
         PortfolioScreen(),
         ReelsScreen(),
         ContactScreen(),
+        ProfileScreen(),
       ],
     );
   }

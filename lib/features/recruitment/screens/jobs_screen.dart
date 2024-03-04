@@ -26,6 +26,7 @@ class JobsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Gap(8),
                 Row(
@@ -43,13 +44,12 @@ class JobsScreen extends StatelessWidget {
                           ),
                         ),
                         Gap(8),
-                        SectionTitle(title: 'Hiring'),
+                        SectionTitle(title: 'Careers'),
                       ],
                     ),
                     GradientButton(
                       height: null,
                       onPressed: () => context.push(applicationsRoute),
-                      visualDensity: VisualDensity.comfortable,
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Applications',
@@ -60,7 +60,7 @@ class JobsScreen extends StatelessWidget {
                 ),
                 Gap(24),
                 Text(
-                  'Have a project in mind that you think we’d be a great fit for it? We’d love to know what you’re thinking',
+                  'Code, Market, Innovate. Make a global impact. Join our team!',
                   style: normal16.copyWith(color: categoriesTextColor),
                 ),
                 Gap(16),

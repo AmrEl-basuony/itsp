@@ -29,6 +29,5 @@ const handShakeAssetPNG = '${imgPath}handshake.png';
 
 const loremText =
     'Lorem ipsum dolor sit amet consectetur. Donec et scelerisque id odio. Pulvinar sit velit tellus in fames faucibus nibh. Habitant est aliquam mollis donec id imperdiet suspendisse pulvinar.';
-const homeCardTextStart = 'Loc Camp ';
-const homeCardText =
-    'is a fast-growing certified localization and translation company';
+const homeCardTextStart = 'ITSP';
+const homeCardText = 'Endless Possibilities … Endless Impact !';

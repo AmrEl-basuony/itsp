@@ -23,7 +23,7 @@ class GradientCategoryCardPlain extends StatelessWidget {
         margin: margin,
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          padding: const EdgeInsets.all(16),
           child: GradientShaderMask(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,6 +35,7 @@ class GradientCategoryCardPlain extends StatelessWidget {
                       child: Text(
                         text,
                         style: medium13,
+                        overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         softWrap: true,
                       ),

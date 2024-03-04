@@ -52,3 +52,12 @@ final LinearGradient overImageGradient = LinearGradient(
     mainColor.withOpacity(0.15),
   ],
 );
+
+final LinearGradient darkGradient = LinearGradient(
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+  colors: [
+    Colors.black,
+    Colors.transparent,
+  ],
+);

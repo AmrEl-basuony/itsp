@@ -4,6 +4,7 @@ import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/core/shared/widgets/gradient_button.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PortfolioCard extends StatelessWidget {
   const PortfolioCard({
@@ -13,8 +14,11 @@ class PortfolioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints:
-          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.6),
+      constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width *
+              (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 0.35
+                  : 0.6)),
       child: Card(
         margin: EdgeInsets.all(4),
         elevation: 10,

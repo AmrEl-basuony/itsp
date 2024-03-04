@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:itsp/core/routing/routes.dart';
 import 'package:itsp/features/2/presentation/screens/about_us_screen.dart';
-import 'package:itsp/features/2/presentation/screens/deprecated_about_us_screen.dart';
 import 'package:itsp/features/2/presentation/screens/digital_marketing_category_screen.dart';
 import 'package:itsp/features/2/presentation/screens/main_layout_screen.dart';
 import 'package:itsp/features/2/presentation/screens/marketing_and_business_house_category_screen.dart';
 import 'package:itsp/features/2/presentation/screens/portfolio_project_screen.dart';
+import 'package:itsp/features/2/presentation/screens/resources_screen.dart';
 import 'package:itsp/features/2/presentation/screens/software_house_category_screen.dart';
 import 'package:itsp/features/authentication/presentation/screens/signin_screen.dart';
 import 'package:itsp/features/authentication/presentation/screens/signup_screen.dart';
@@ -80,6 +80,10 @@ final router = GoRouter(
     GoRoute(
       path: applicationDetailsRoute,
       builder: (context, state) => const ApplicationDetailsScreen(),
+    ),
+    GoRoute(
+      path: resourcesRoute,
+      builder: (context, state) => const ResourcesScreen(),
     ),
   ],
 );

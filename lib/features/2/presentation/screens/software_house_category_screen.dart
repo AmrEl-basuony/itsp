@@ -6,6 +6,7 @@ import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class SoftwareHouseCategoryScreen extends StatelessWidget {
   const SoftwareHouseCategoryScreen({super.key});
@@ -16,9 +17,13 @@ class SoftwareHouseCategoryScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 32
+                  : 16),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(8),
                 Row(
@@ -39,13 +44,16 @@ class SoftwareHouseCategoryScreen extends StatelessWidget {
                 Gap(24),
                 Text(
                   'We “potential” “Empower” “Cultivate” your business with our transformative Software Solutions.',
-                  textAlign: TextAlign.center,
                   style: semiBold16.copyWith(color: darkModeColor),
                 ),
                 Gap(16),
-                Image.asset(
-                  mockupBigAssetPNG,
-                  width: MediaQuery.of(context).size.width,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      mockupBigAssetPNG,
+                    ),
+                  ],
                 ),
                 Gap(16),
                 SectionTitle(title: 'Websites'),

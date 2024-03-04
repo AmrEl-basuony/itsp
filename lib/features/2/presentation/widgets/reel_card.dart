@@ -5,6 +5,7 @@ import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/dialogs/video_dialog.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ReelCard extends StatelessWidget {
   const ReelCard({super.key});
@@ -12,10 +13,13 @@ class ReelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints:
-          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+      constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width *
+              (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 0.4
+                  : 0.75)),
       child: Card(
-        margin: EdgeInsets.all(4),
+        margin: EdgeInsets.all(8),
         elevation: 10,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
@@ -35,11 +39,14 @@ class ReelCard extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                portfolioAssetPNG,
-                                fit: BoxFit.fitWidth,
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  portfolioAssetPNG,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
                           ),

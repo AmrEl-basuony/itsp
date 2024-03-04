@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -9,6 +10,7 @@ import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/onboarding/presentation/blocs/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:itsp/features/onboarding/presentation/widgets/on_boarding_fab.dart';
 import 'package:itsp/features/onboarding/presentation/widgets/on_boarding_indicator.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -33,7 +35,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
               return SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                              ? 32
+                              : 16),
                   child: IntroductionScreen(
                     key: _introKey,
                     globalBackgroundColor: Colors.transparent,
@@ -56,88 +62,71 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                     pages: [
                       PageViewModel(
-                        image: Column(
-                          children: [
-                            Flexible(
-                              flex: 8,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height *
-                                              0.4),
-                                  child: SvgPicture.asset(
-                                    logoAssetSVG,
-                                  ),
-                                ),
+                        image: Container(
+                          constraints: BoxConstraints(maxWidth: 375),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                logoAssetSVG,
+                                fit: BoxFit.fill,
                               ),
-                            ),
-                            Spacer(flex: 7),
-                          ],
+                              Gap(16),
+                              Text(
+                                loremText,
+                                style: semiBold14,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
-                        decoration: PageDecoration(
-                          fullScreen: true,
-                          bodyTextStyle: semiBold14,
-                        ),
+                        decoration: const PageDecoration(fullScreen: true),
                         title: '',
-                        body: loremText,
+                        body: '',
                       ),
                       PageViewModel(
-                        image: Column(
-                          children: [
-                            Flexible(
-                              flex: 8,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height *
-                                              0.4),
-                                  child: Image.asset(
-                                    robotAssetPNG,
-                                  ),
-                                ),
+                        image: Container(
+                          constraints: BoxConstraints(maxWidth: 375),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                officeAssetPNG,
                               ),
-                            ),
-                            Spacer(flex: 7),
-                          ],
+                              Gap(16),
+                              Text(
+                                loremText,
+                                style: semiBold14,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
-                        decoration: PageDecoration(
-                          fullScreen: true,
-                          bodyTextStyle: semiBold14,
-                        ),
+                        decoration: const PageDecoration(fullScreen: true),
                         title: '',
-                        body: loremText,
+                        body: '',
                       ),
                       PageViewModel(
-                        image: Column(
-                          children: [
-                            Flexible(
-                              flex: 8,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height *
-                                              0.4),
-                                  child: Image.asset(
-                                    mockupAssetPNG,
-                                  ),
-                                ),
+                        image: Container(
+                          constraints: BoxConstraints(maxWidth: 375),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                mockupAssetPNG,
                               ),
-                            ),
-                            Spacer(flex: 7),
-                          ],
+                              Gap(16),
+                              Text(
+                                loremText,
+                                style: semiBold14,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
-                        decoration: PageDecoration(
-                          fullScreen: true,
-                          bodyTextStyle: semiBold14,
-                        ),
+                        decoration: const PageDecoration(fullScreen: true),
                         title: '',
-                        body: loremText,
+                        body: '',
                       ),
                     ],
                   ),

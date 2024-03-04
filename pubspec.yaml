@@ -12,7 +12,7 @@ dependencies:
 
   go_router: ^13.2.0
   flutter_bloc: ^8.1.4
-  responsive_framework: ^1.1.1
+  responsive_framework: ^1.4.0
   cached_network_image: ^3.3.1
   flutter_svg: ^2.0.9
   persistent_bottom_nav_bar_v2: ^4.2.8

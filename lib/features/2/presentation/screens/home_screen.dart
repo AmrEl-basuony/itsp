@@ -14,11 +14,12 @@ import 'package:itsp/features/2/presentation/widgets/gradient_card.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card_plain.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card_wide.dart';
-import 'package:itsp/core/shared/widgets/gradient_outlined_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/features/2/presentation/widgets/portfolio_card.dart';
 import 'package:itsp/features/2/presentation/widgets/reel_card.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:itsp/features/2/presentation/widgets/section_title_with_all_button.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,70 +30,73 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 32
+                  : 16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(8),
-                GestureDetector(
-                  onTap: () {
-                    //TODO Remove after setting up appropriate button for profile
-                    context.push(profileRoute);
-                  },
-                  child: GradientShaderMask(
-                    child: SvgPicture.asset(
-                      logoAssetSVG,
-                      height: 25,
-                    ),
+                GradientShaderMask(
+                  child: SvgPicture.asset(
+                    logoAssetSVG,
+                    height: 25,
                   ),
                 ),
                 Gap(16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GradientButton(
                       onPressed: () {},
-                      padding: const EdgeInsets.all(8),
-                      width: 30,
+                      padding: EdgeInsets.all(
+                          ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                              ? 16
+                              : 0),
                       child: const Icon(
-                        Icons.emoji_objects,
+                        Icons.emoji_objects_outlined,
                         size: 14,
                       ),
                     ),
+                    Gap(16),
                     GradientButton(
-                      onPressed: () {
-                        context.push(jobsRoute);
-                      },
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 4),
+                      onPressed: () => context.push(jobsRoute),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ResponsiveBreakpoints.of(context)
+                                  .largerThan(MOBILE)
+                              ? 52
+                              : 16),
                       child: Text(
-                        'Hiring',
+                        'Careers',
                         style: normal12,
                       ),
                     ),
+                    Gap(16),
                     GradientButton(
-                      onPressed: () {
-                        context.push(aboutUsRoute);
-                      },
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 4),
+                      onPressed: () => context.push(aboutUsRoute),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ResponsiveBreakpoints.of(context)
+                                  .largerThan(MOBILE)
+                              ? 52
+                              : 16),
                       child: Text(
                         'About Us',
                         style: normal12,
                       ),
                     ),
-                    GradientOutlinedButton(
-                      onPressed: () {
-                        context.push(signinRoute);
-                      },
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 4),
-                      child: GradientShaderMask(
-                        child: Text(
-                          'Login',
-                          style: normal12,
-                        ),
+                    Gap(16),
+                    GradientButton(
+                      onPressed: () => context.push(resourcesRoute),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ResponsiveBreakpoints.of(context)
+                                  .largerThan(MOBILE)
+                              ? 52
+                              : 16),
+                      child: Text(
+                        'Resources',
+                        style: normal12,
                       ),
                     ),
                   ],
@@ -110,19 +114,22 @@ class HomeScreen extends StatelessWidget {
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
-                              child: RichText(
-                                maxLines: 3,
-                                softWrap: true,
-                                text: TextSpan(
-                                  text: homeCardTextStart,
-                                  style: bold12,
-                                  children: [
-                                    TextSpan(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    homeCardTextStart,
+                                    style: bold12,
+                                  ),
+                                  RichText(
+                                    maxLines: 3,
+                                    softWrap: true,
+                                    text: TextSpan(
                                       text: homeCardText,
                                       style: normal12,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -133,50 +140,53 @@ class HomeScreen extends StatelessWidget {
                     Image.asset(phoneAssetPNG),
                   ],
                 ),
-                SectionTitle(title: 'Out Categories'),
+                SectionTitle(title: 'Our Solutions'),
                 Row(
                   children: [
                     GradientCategoryCard(
-                      text: 'Software \nHouse',
+                      text: 'Software House',
                       icon: Icons.code,
                       onTap: () => context.push(softwareHouseCategoryRoute),
                     ),
+                    Gap(8),
                     GradientCategoryCardPlain(
-                      text: 'Bussiness \nHouse',
+                      text: 'Marketing & Business House',
                       icon: Icons.workspace_premium,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    GradientCategoryCard(
-                      text: 'Marketing \nHouse',
-                      icon: Icons.ssid_chart_outlined,
                       onTap: () =>
                           context.push(marketingAndBusinessHouseCategoryRoute),
                     ),
-                    GradientCategoryCardPlain(
-                      text: 'E-Marketing \nHouse',
-                      icon: Icons.bookmarks,
-                      onTap: () => context.push(digitalMarketingCategoryRoute),
-                    ),
+                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
+                      Gap(8),
+                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
+                      GradientCategoryCard(
+                        text: 'Digital Marketing House',
+                        icon: Icons.code,
+                        onTap: () =>
+                            context.push(digitalMarketingCategoryRoute),
+                      ),
                   ],
                 ),
-                GradientCategoryCardWide(
-                  text: 'Media House',
-                  icon: Icons.mail,
-                ),
+                if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
+                  Gap(8),
+                if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
+                  GradientCategoryCardWide(
+                    text: 'Digital Marketing House',
+                    icon: Icons.mail,
+                    onTap: () => context.push(digitalMarketingCategoryRoute),
+                  ),
                 Gap(8),
-                SectionTitle(
+                SectionTitleWithAllButton(
                   title: 'Reels',
-                  showAllButton: true,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
                   child: Row(
                     children: []..addAll(
-                        List.generate(4, (index) => ReelCard()),
+                        List.generate(
+                          4,
+                          (index) => ReelCard(),
+                        ),
                       ),
                   ),
                 ),
@@ -202,9 +212,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Gap(8),
-                SectionTitle(
+                SectionTitleWithAllButton(
                   title: 'Portfolio',
-                  showAllButton: true,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

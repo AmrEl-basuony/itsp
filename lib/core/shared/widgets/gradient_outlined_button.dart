@@ -6,8 +6,9 @@ class GradientOutlinedButton extends StatelessWidget {
     required this.onPressed,
     this.padding = const EdgeInsets.all(0),
     this.margin,
-    this.height = 30,
+    this.height,
     this.width,
+    this.radius = 8,
     required this.child,
     this.visualDensity,
     super.key,
@@ -17,13 +18,14 @@ class GradientOutlinedButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding, margin;
   final double? height, width;
   final VisualDensity? visualDensity;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -34,8 +36,8 @@ class GradientOutlinedButton extends StatelessWidget {
           visualDensity: visualDensity,
           minimumSize: Size(width ?? 0, height ?? 0),
           padding: padding,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius)),
         ),
         onPressed: onPressed,
         child: GradientShaderMask(

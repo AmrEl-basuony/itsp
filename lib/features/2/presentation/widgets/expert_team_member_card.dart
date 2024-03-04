@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ExpertTeamMemberCard extends StatelessWidget {
   const ExpertTeamMemberCard(
@@ -19,8 +20,11 @@ class ExpertTeamMemberCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
         constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.4,
-            minHeight: MediaQuery.of(context).size.height * 0.35),
+            maxWidth: MediaQuery.of(context).size.width *
+                (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                    ? 0.2
+                    : 0.4),
+            maxHeight: MediaQuery.of(context).size.height * 0.4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
@@ -35,7 +39,7 @@ class ExpertTeamMemberCard extends StatelessWidget {
               Flexible(
                 child: Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 8),
+                      EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(bottom: Radius.circular(16)),

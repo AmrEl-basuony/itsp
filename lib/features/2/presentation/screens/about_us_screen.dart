@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
@@ -10,7 +8,7 @@ import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/card_plain.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_card.dart';
-import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -25,7 +23,11 @@ class AboutUsScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(
+                    horizontal:
+                        ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                            ? 32
+                            : 16),
                 decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(32)),
@@ -69,7 +71,11 @@ class AboutUsScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(
+                    horizontal:
+                        ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                            ? 32
+                            : 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -303,32 +309,291 @@ class AboutUsScreen extends StatelessWidget {
                         children: []..addAll(
                             List.generate(
                               3,
-                              (index) => CardPlain(
-                                margin: EdgeInsets.all(0),
-                                elevation: 0,
-                                borderRadius: 24,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(officeAssetPNG),
-                                        fit: BoxFit.fill),
+                              (index) => Container(
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width *
+                                            (ResponsiveBreakpoints.of(context)
+                                                    .largerThan(MOBILE)
+                                                ? 0.44
+                                                : 0.8)),
+                                child: CardPlain(
+                                  margin: EdgeInsets.only(right: 16),
+                                  elevation: 0,
+                                  borderRadius: 24,
+                                  child: Container(
+                                    padding: EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(socialAssetPNG),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Gap(32),
+                                        Text(
+                                          'Agile Methodology',
+                                          style: bold18,
+                                        ),
+                                        Gap(16),
+                                        Text(
+                                          'Throughout the software development lifecycle, we use agile development approaches to guarantee flexibility, speed, and continual improvement.',
+                                          style: medium14,
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'Marketing Standards',
+                        style: medium20,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        ' • Data-Driven Strategies',
+                        style: normal20,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'To ensure that campaigns are precise, pertinent, and measurable, we base our marketing decisions on data insights and analytics.',
+                        style: normal14,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        ' • Ethical Practices',
+                        style: normal20,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'We adhere to ethical marketing guidelines, ensuring compliance with data privacy regulations and avoiding any misleading tactics.',
+                        style: normal14,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        ' • Transparency & Reporting:',
+                        style: normal20,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'To keep our clients informed and engaged, we provide detailed reports on campaign performance, important metrics, and ROI',
+                        style: normal14,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        ' • Continuous Optimization',
+                        style: normal20,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'We constantly monitor and optimize campaigns, adjusting strategies in response to performance data and evolving market trends.',
+                        style: normal14,
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'Overall Excellence Standards',
+                        style: medium20,
+                      ),
+                    ),
+                    Gap(16),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: []..addAll(List.generate(
+                            3,
+                            (index) => Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width *
+                                      (ResponsiveBreakpoints.of(context)
+                                              .largerThan(MOBILE)
+                                          ? 0.44
+                                          : 0.8)),
+                              child: GradientCard(
+                                margin: EdgeInsets.only(right: 16),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Text(
-                                        'Software Development Standards',
+                                        'Client Partnership',
                                         style: medium20,
                                       ),
+                                      Gap(16),
                                       Text(
-                                        'Software Development Standards',
-                                        style: medium20,
+                                        '''treat our clients as partners, encouraging co-operation, building trust, and fulfilling their unique needs.''',
+                                        style: normal14,
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
                             ),
+                          )),
+                      ),
+                    ),
+                    Gap(16),
+                    GradientShaderMask(
+                      child: Text(
+                        'Our Dream Team',
+                        style: medium20,
+                      ),
+                    ),
+                    Gap(16),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        GradientCard(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              'animators',
+                              style: normal12,
+                            ),
                           ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'video editors',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'content editors',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'software engineers',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'mobile app developers',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'Flexible prices',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        CardPlain(
+                          borderRadius: 8,
+                          elevation: 0,
+                          margin: EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: GradientShaderMask(
+                              child: Text(
+                                'expert marketers',
+                                style: normal12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gap(16),
+                    CardPlain(
+                      elevation: 0,
+                      margin: EdgeInsets.all(0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            GradientShaderMask(
+                              child: Text(
+                                'Animators',
+                                style: medium20,
+                              ),
+                            ),
+                            Gap(16),
+                            GradientShaderMask(
+                              child: Text(
+                                'Our professional team of animators believes in the power of storytelling, through crafting outstanding animations, that resonate emotionally and leave a long-lasting impression.',
+                                style: normal16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Gap(navBarHeight),

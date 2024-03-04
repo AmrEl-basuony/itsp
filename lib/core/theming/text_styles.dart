@@ -30,6 +30,7 @@ const TextStyle normal12 = TextStyle(
   fontWeight: FontWeight.normal,
   color: Colors.white,
 );
+final TextStyle medium12 = normal12.copyWith(fontWeight: FontWeight.w500);
 final TextStyle bold12 = normal12.copyWith(fontWeight: FontWeight.bold);
 
 const TextStyle normal13 = TextStyle(
@@ -73,7 +74,8 @@ const TextStyle normal18 = TextStyle(
   fontWeight: FontWeight.normal,
   color: Colors.white,
 );
-final TextStyle medium18 = normal16.copyWith(fontWeight: FontWeight.w500);
+final TextStyle medium18 = normal18.copyWith(fontWeight: FontWeight.w500);
+final TextStyle bold18 = normal18.copyWith(fontWeight: FontWeight.bold);
 
 const TextStyle normal20 = TextStyle(
   fontFamily: fontFamily,

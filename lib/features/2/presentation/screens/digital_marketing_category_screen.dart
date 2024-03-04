@@ -6,6 +6,7 @@ import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class DigitalMarketingCategoryScreen extends StatelessWidget {
   const DigitalMarketingCategoryScreen({super.key});
@@ -16,7 +17,10 @@ class DigitalMarketingCategoryScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 32
+                  : 16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,9 +48,13 @@ class DigitalMarketingCategoryScreen extends StatelessWidget {
                   style: semiBold16.copyWith(color: darkModeColor),
                 ),
                 Gap(16),
-                Image.asset(
-                  socialAssetPNG,
-                  width: MediaQuery.of(context).size.width,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      socialAssetPNG,
+                    ),
+                  ],
                 ),
                 Gap(16),
                 SectionTitle(title: 'Performance Management'),
