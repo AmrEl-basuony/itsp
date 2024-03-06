@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -23,13 +22,13 @@ class SoftwareHouseCategoryScreen extends StatelessWidget {
                   : 16),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Gap(8),
                 Row(
                   children: [
                     ButtonPlain(
-                      onPressed: () => context.pop(),
+                      onPressed: () => Navigator.of(context).pop(),
                       width: 30,
                       color: backButtonColor,
                       child: Icon(
@@ -47,18 +46,14 @@ class SoftwareHouseCategoryScreen extends StatelessWidget {
                   style: semiBold16.copyWith(color: darkModeColor),
                 ),
                 Gap(16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      mockupBigAssetPNG,
-                    ),
-                  ],
+                Image.asset(
+                  mockupBigAssetPNG,
+                  fit: BoxFit.fill,
                 ),
                 Gap(16),
                 SectionTitle(title: 'Websites'),
                 Text(
-                  '"Looking for a website? Look No Further! “ Our platform seamlessly translates your designs into pristine, semantic code, primed for webpublication and developer handoff.',
+                  '"Looking for a website? Look No Further! “Our platform seamlessly translates your designs into pristine, semantic code, primed for webpublication and developer handoff.',
                   style: normal16.copyWith(color: darkModeColor),
                 ),
                 Gap(16),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -6,6 +7,7 @@ import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/features/2/presentation/widgets/reel_item_row.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ReelsScreen extends StatelessWidget {
   const ReelsScreen({super.key});
@@ -16,7 +18,12 @@ class ReelsScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0).copyWith(top: 8),
+          padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 52
+                          : 16)
+              .copyWith(top: 8),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +47,24 @@ class ReelsScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                   ),
                 ),
-                ReelItemRow(),
-                ReelItemRow(),
-                ReelItemRow(),
-                ReelItemRow(),
+                ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                    ? AlignedGridView.count(
+                        itemCount: 7,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        clipBehavior: Clip.none,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        itemBuilder: (BuildContext context, int index) =>
+                            ReelItemRow(),
+                      )
+                    : ListView.builder(
+                        itemCount: 5,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => ReelItemRow(),
+                      ),
                 Gap(navBarHeight),
               ],
             ),

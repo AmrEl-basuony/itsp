@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/routing/routes.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
+import 'package:itsp/features/2/presentation/screens/portfolio_project_screen.dart';
 import 'package:itsp/features/2/presentation/widgets/portfolio_item.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});
@@ -18,7 +19,12 @@ class PortfolioScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0).copyWith(top: 8),
+          padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 52
+                          : 16)
+              .copyWith(top: 8),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,12 +41,18 @@ class PortfolioScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   clipBehavior: Clip.none,
-                  crossAxisCount: 2,
+                  crossAxisCount:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 4
+                          : 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (BuildContext context, int index) {
                     return PortfolioItem(
-                      onTap: () => context.push(portfolioProjectRoute),
+                      onTap: () =>   pushNewScreen(
+                            context,
+                            screen: PortfolioProjectScreen(),
+                          ),
                     );
                   },
                 ),

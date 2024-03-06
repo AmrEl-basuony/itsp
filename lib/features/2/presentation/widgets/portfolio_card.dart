@@ -13,12 +13,9 @@ class PortfolioCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width *
-              (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 0.35
-                  : 0.6)),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width *
+          (ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 0.35 : 0.6),
       child: Card(
         margin: EdgeInsets.all(4),
         elevation: 10,
@@ -28,27 +25,27 @@ class PortfolioCard extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(8),
-          child: IntrinsicHeight(
+          child: AspectRatio(
+            aspectRatio:
+                ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 1 : 0.88,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          portfolioAssetPNG,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      portfolioAssetPNG,
+                      fit: BoxFit.fill,
                     ),
-                  ],
+                  ),
                 ),
                 Gap(8),
                 Text(
                   'Visit Egypt',
                   style: semiBold14.copyWith(color: mainColor),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Gap(4),
                 Text(
@@ -58,18 +55,14 @@ class PortfolioCard extends StatelessWidget {
                   style: normal10.copyWith(color: mainColor),
                 ),
                 Gap(8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: GradientButton(
-                        onPressed: () {},
-                        child: Text(
-                          'More Details',
-                          style: normal14,
-                        ),
-                      ),
-                    ),
-                  ],
+                Spacer(),
+                GradientButton(
+                  height: 1,
+                  onPressed: () {},
+                  child: Text(
+                    'More Details',
+                    style: medium14,
+                  ),
                 ),
               ],
             ),

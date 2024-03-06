@@ -14,7 +14,7 @@ import 'package:itsp/features/recruitment/screens/application_details_screen.dar
 import 'package:itsp/features/recruitment/screens/application_screen.dart';
 import 'package:itsp/features/recruitment/screens/applications_screen.dart';
 import 'package:itsp/features/recruitment/screens/job_details_screen.dart';
-import 'package:itsp/features/recruitment/screens/jobs_screen.dart';
+import 'package:itsp/features/recruitment/screens/careers_screen.dart';
 import 'package:itsp/features/recruitment/screens/profile_screen.dart';
 
 final router = GoRouter(
@@ -62,8 +62,8 @@ final router = GoRouter(
       builder: (context, state) => const ProfileScreen(),
     ),
     GoRoute(
-      path: jobsRoute,
-      builder: (context, state) => const JobsScreen(),
+      path: careersRoute,
+      builder: (context, state) => const CareersScreen(),
     ),
     GoRoute(
       path: jobDetailsRoute,

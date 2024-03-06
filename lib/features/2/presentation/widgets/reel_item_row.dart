@@ -14,6 +14,7 @@ class ReelItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardPlain(
+      borderRadius: 8,
       margin: EdgeInsets.all(0).copyWith(top: 16),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,12 +42,16 @@ class ReelItemRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Mohamed El-hossiny',
-                          style: semiBold14.copyWith(color: mainColor),
+                        Expanded(
+                          child: Text(
+                            'Mohamed El-hossiny',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: semiBold14.copyWith(color: mainColor),
+                          ),
                         ),
+                        Gap(8),
                         Container(
                           padding:
                               EdgeInsets.symmetric(vertical: 4, horizontal: 8),

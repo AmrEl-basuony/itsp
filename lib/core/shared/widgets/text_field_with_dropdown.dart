@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 
@@ -27,8 +28,8 @@ class TextFieldWithDropdown extends StatelessWidget {
           value: items?.first.value,
           style: normal14.copyWith(color: Colors.black),
           iconStyleData: IconStyleData(
-            icon: Icon(Icons.expand_more),
-            openMenuIcon: Icon(Icons.expand_less),
+            icon: FaIcon(FontAwesomeIcons.angleDown),
+            openMenuIcon: FaIcon(FontAwesomeIcons.angleUp),
           ),
           items: items,
           buttonStyleData: ButtonStyleData(

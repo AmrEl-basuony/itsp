@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
@@ -45,7 +44,7 @@ class ResourcesScreen extends StatelessWidget {
                           Row(
                             children: [
                               ButtonPlain(
-                                onPressed: () => context.pop(),
+                                onPressed: () => Navigator.of(context).pop(),
                                 width: 30,
                                 color: backButtonColor,
                                 child: Icon(
@@ -98,52 +97,58 @@ class ResourcesScreen extends StatelessWidget {
                             children: []..addAll(
                                 List.generate(
                                   4,
-                                  (index) => Container(
-                                    constraints: BoxConstraints(
-                                        maxWidth: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                            (ResponsiveBreakpoints.of(context)
-                                                    .largerThan(MOBILE)
-                                                ? 0.3
-                                                : 0.6)),
-                                    child: CardPlain(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            AspectRatio(
-                                              aspectRatio: 16 / 9,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                child: Image.asset(
-                                                  socialAssetPNG,
-                                                  fit: BoxFit.fill,
+                                  (index) => SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        (ResponsiveBreakpoints.of(context)
+                                                .largerThan(MOBILE)
+                                            ? 0.3
+                                            : 0.6),
+                                    child: AspectRatio(
+                                      aspectRatio: 5.25 / 8,
+                                      child: CardPlain(
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AspectRatio(
+                                                aspectRatio: 4 / 3,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  child: Image.asset(
+                                                    socialAssetPNG,
+                                                    fit: BoxFit.fill,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              'Content Creators collaboration',
-                                              style: medium14.copyWith(
-                                                  color: darkModeColor),
-                                            ),
-                                            Gap(8),
-                                            Text(
-                                              'Lorem ipsum dolor sit amet consectetur. Curabitur neque duis facilisi commodo bibendum mattis amet ipsum. Mus netus.',
-                                              style: normal13.copyWith(
-                                                  color: darkModeColor),
-                                            ),
-                                            Gap(16),
-                                            Text(
-                                              '4 Min • August 19, 2022',
-                                              style: normal12.copyWith(
-                                                  color: darkModeColor),
-                                            ),
-                                          ],
+                                              Text(
+                                                'Content Creators collaboration ',
+                                                maxLines: 2,
+                                                style: medium14.copyWith(
+                                                    color: darkModeColor),
+                                              ),
+                                              Gap(8),
+                                              Expanded(
+                                                child: Text(
+                                                  'Lorem ipsum dolor sit amet consectetur. Curabitur neque duis facilisi commodo bibendum mattis amet ipsum. Mus netus.',
+                                                  style: normal13.copyWith(
+                                                      color: darkModeColor),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 5,
+                                                ),
+                                              ),
+                                              Gap(16),
+                                              Text(
+                                                '4 Min • August 19, 2022',
+                                                style: normal12.copyWith(
+                                                    color: darkModeColor),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -167,15 +172,12 @@ class ResourcesScreen extends StatelessWidget {
                             children: []..addAll(
                                 List.generate(
                                   4,
-                                  (index) => Container(
-                                    constraints: BoxConstraints(
-                                        maxWidth: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                            (ResponsiveBreakpoints.of(context)
-                                                    .largerThan(MOBILE)
-                                                ? 0.3
-                                                : 0.6)),
+                                  (index) => SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        (ResponsiveBreakpoints.of(context)
+                                                .largerThan(MOBILE)
+                                            ? 0.3
+                                            : 0.6),
                                     child: AspectRatio(
                                       aspectRatio: 1,
                                       child: CardPlain(
@@ -218,7 +220,7 @@ class ResourcesScreen extends StatelessWidget {
                                                     'DIGITAL design, PRODUCT MANAGER',
                                                     style: normal12,
                                                   ),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -298,15 +300,19 @@ class ResourcesScreen extends StatelessWidget {
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return CardPlain(
-                                    elevation: 0,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Row(
-                                        children: [
-                                          Flexible(
-                                            child: AspectRatio(
-                                              aspectRatio: 1.4,
+                                  return AspectRatio(
+                                    aspectRatio:
+                                        ResponsiveBreakpoints.of(context)
+                                                .largerThan(MOBILE)
+                                            ? 5 / 1.1
+                                            : 7 / 3.7,
+                                    child: CardPlain(
+                                      elevation: 0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(12),
@@ -316,29 +322,35 @@ class ResourcesScreen extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Gap(16),
-                                          Flexible(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Content Creators collaberation',
-                                                  style: normal16.copyWith(
-                                                      color: darkModeColor),
-                                                ),
-                                                Gap(8),
-                                                Text(
-                                                  'Lorem ipsum dolor sit amet consectetur. Curabitur neque duis facilisi commodo bibendum mattis amet ipsum. Mus netus.',
-                                                  style: medium12.copyWith(
-                                                      color: darkModeColor),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
+                                            Gap(16),
+                                            Flexible(
+                                              flex: ResponsiveBreakpoints.of(
+                                                          context)
+                                                      .largerThan(MOBILE)
+                                                  ? 3
+                                                  : 2,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Content Creators collaberation',
+                                                    style: normal16.copyWith(
+                                                        color: darkModeColor),
+                                                  ),
+                                                  Gap(8),
+                                                  Flexible(
+                                                    child: Text(
+                                                      'Lorem ipsum dolor sit amet consectetur. Curabitur neque duis facilisi commodo bibendum mattis amet ipsum. Mus netus. Lorem ipsum dolor sit amet consectetur. Curabitur neque duis facilisi commodo bibendum mattis amet ipsum. Mus netus.',
+                                                      style: medium12.copyWith(
+                                                          color: darkModeColor),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );

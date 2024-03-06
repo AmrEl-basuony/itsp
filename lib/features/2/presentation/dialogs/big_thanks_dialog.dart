@@ -5,7 +5,7 @@ import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 
-Future<void> showThanksDialog(BuildContext context) {
+Future<void> showBigThanksDialog(BuildContext context) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {

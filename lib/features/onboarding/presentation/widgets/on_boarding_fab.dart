@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OnBoardingFab extends StatelessWidget {
   const OnBoardingFab({required this.onPressed, super.key});
@@ -10,7 +11,7 @@ class OnBoardingFab extends StatelessWidget {
       onPressed: onPressed,
       shape: const CircleBorder(),
       backgroundColor: Colors.white,
-      child: const Icon(Icons.arrow_forward),
+      child: const FaIcon(FontAwesomeIcons.arrowRight),
     );
   }
 }

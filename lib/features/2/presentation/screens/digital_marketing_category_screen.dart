@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -29,7 +28,7 @@ class DigitalMarketingCategoryScreen extends StatelessWidget {
                 Row(
                   children: [
                     ButtonPlain(
-                      onPressed: () => context.pop(),
+                      onPressed: () => Navigator.of(context).pop(),
                       width: 30,
                       color: backButtonColor,
                       child: Icon(
@@ -44,7 +43,6 @@ class DigitalMarketingCategoryScreen extends StatelessWidget {
                 Gap(24),
                 Text(
                   'Unleash Your Brand\'s Digital Superpowers with ITSP!',
-                  textAlign: TextAlign.center,
                   style: semiBold16.copyWith(color: darkModeColor),
                 ),
                 Gap(16),

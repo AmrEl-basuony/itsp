@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -19,12 +20,8 @@ class ExpertTeamMemberCard extends StatelessWidget {
       elevation: 10,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
-        constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width *
-                (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                    ? 0.2
-                    : 0.4),
-            maxHeight: MediaQuery.of(context).size.height * 0.4),
+        width: MediaQuery.of(context).size.width *
+            (ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 0.2 : 0.4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
@@ -32,7 +29,8 @@ class ExpertTeamMemberCard extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        child: IntrinsicHeight(
+        child: AspectRatio(
+          aspectRatio: 159 / 302,
           child: Column(
             children: [
               Spacer(),
@@ -51,35 +49,42 @@ class ExpertTeamMemberCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
+                        overflow: TextOverflow.ellipsis,
                         style: bold14,
                       ),
                       Text(
                         subTitle,
                         style: normal11,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         body,
                         style: normal10,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
                       ),
                       Gap(8),
                       Row(
                         children: [
-                          Icon(
-                            Icons.snapchat,
+                          FaIcon(
+                            FontAwesomeIcons.squareSnapchat,
                             color: Colors.white,
+                            size: 19,
                           ),
                           Gap(8),
-                          Icon(
-                            Icons.facebook,
+                          FaIcon(
+                            FontAwesomeIcons.squareFacebook,
                             color: Colors.white,
+                            size: 19,
                           ),
                           Gap(8),
-                          Icon(
-                            Icons.facebook,
+                          FaIcon(
+                            FontAwesomeIcons.squareBehance,
                             color: Colors.white,
+                            size: 19,
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

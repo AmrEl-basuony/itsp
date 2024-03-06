@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_card.dart';
@@ -30,30 +31,30 @@ class GradientCategoryCardWide extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: medium13,
+                  style: medium11,
                   maxLines: 2,
                   softWrap: true,
                 ),
                 Gap(16),
                 Row(
                   children: [
-                    Icon(
-                      Icons.double_arrow,
+                    FaIcon(
+                      FontAwesomeIcons.anglesRight,
                       color: Colors.white,
-                      size: 18,
+                      size: 11,
                     ),
                     Text(
-                      'Click to learn more',
+                      ' Click to learn more',
                       style: medium11,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
               ],
             ),
-            Icon(
+            FaIcon(
               icon,
               color: Colors.white,
-              size: 32,
             ),
           ],
         ),

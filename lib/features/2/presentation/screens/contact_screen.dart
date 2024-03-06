@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
+import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
+import 'package:itsp/features/2/presentation/dialogs/big_thanks_dialog.dart';
 import 'package:itsp/features/2/presentation/dialogs/thanks_dialog.dart';
 import 'package:itsp/core/shared/widgets/gradient_button.dart';
 import 'package:itsp/features/2/presentation/modals/maps_modal.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -18,7 +22,12 @@ class ContactScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0).copyWith(top: 8),
+          padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 52
+                          : 16)
+              .copyWith(top: 8),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,8 +39,8 @@ class ContactScreen extends StatelessWidget {
                     GradientButton(
                       onPressed: () async => await showMapsModal(context),
                       visualDensity: VisualDensity.compact,
-                      child: const Icon(
-                        Icons.location_on,
+                      child: const FaIcon(
+                        FontAwesomeIcons.locationPin,
                         size: 14,
                       ),
                     ),
@@ -39,8 +48,15 @@ class ContactScreen extends StatelessWidget {
                 ),
                 Gap(16),
                 Text(
-                  'Have a project in mind that you think we’d be a great fit for it? We’d love to know what you’re thinking',
+                  'Reach new markets, engage new audiences. We\'re just a click away!',
                   style: normal16.copyWith(color: categoriesTextColor),
+                ),
+                Gap(16),
+                GradientShaderMask(
+                  child: Text(
+                    'Think global, connect everywhere. Let\'s chat!',
+                    style: medium18,
+                  ),
                 ),
                 Gap(16),
                 TextFieldWithTitle(
@@ -79,7 +95,9 @@ class ContactScreen extends StatelessWidget {
                       flex: 3,
                       child: GradientButton(
                         onPressed: () {
-                          showThanksDialog(context);
+                          ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                              ? showBigThanksDialog(context)
+                              : showThanksDialog(context);
                         },
                         height: null,
                         visualDensity: VisualDensity.comfortable,
@@ -89,7 +107,8 @@ class ContactScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    if (!ResponsiveBreakpoints.of(context).largerThan(MOBILE))
+                      Spacer(),
                   ],
                 ),
                 Gap(navBarHeight),

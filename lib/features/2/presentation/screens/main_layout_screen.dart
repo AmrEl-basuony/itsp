@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
@@ -31,38 +32,33 @@ class MainLayoutScreen extends StatelessWidget {
           colorBehindNavBar: Colors.white),
       items: [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home_outlined),
+          icon: const FaIcon(FontAwesomeIcons.house),
           title: "Home",
-          iconSize: 32,
           textStyle: normal12,
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.folder_outlined),
+          icon: const FaIcon(FontAwesomeIcons.folderOpen),
           title: "Portfolio",
-          iconSize: 32,
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.view_carousel_outlined),
-          iconSize: 32,
+          icon: const FaIcon(FontAwesomeIcons.vrCardboard),
           title: "Reels",
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.contact_page_outlined),
+          icon: const FaIcon(FontAwesomeIcons.addressBook),
           title: "Contact",
-          iconSize: 32,
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.person_outline),
+          icon: const FaIcon(FontAwesomeIcons.user),
           title: "Profile",
-          iconSize: 32,
           activeColorPrimary: navBarActiveItemColor,
           inactiveColorPrimary: darkModeColor,
         ),

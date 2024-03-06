@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/card_plain.dart';
@@ -34,30 +35,33 @@ class GradientCategoryCardPlain extends StatelessWidget {
                     Flexible(
                       child: Text(
                         text,
-                        style: medium13,
+                        style: medium11,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         softWrap: true,
                       ),
                     ),
-                    Icon(
+                    Gap(24),
+                    FaIcon(
                       icon,
                       color: Colors.white,
-                      size: 32,
                     ),
                   ],
                 ),
                 Gap(16),
                 Row(
                   children: [
-                    Icon(
-                      Icons.double_arrow,
+                    FaIcon(
+                      FontAwesomeIcons.anglesRight,
                       color: Colors.white,
-                      size: 18,
+                      size: 11,
                     ),
-                    Text(
-                      'Click to learn more',
-                      style: medium11,
+                    Flexible(
+                      child: Text(
+                        ' Click to learn more',
+                        style: medium11,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),

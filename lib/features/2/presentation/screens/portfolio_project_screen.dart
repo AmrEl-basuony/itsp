@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +10,7 @@ import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/features/2/presentation/widgets/carousel_with_main_image.dart';
 import 'package:itsp/features/2/presentation/widgets/indented_text_list.dart';
 import 'package:itsp/features/2/presentation/widgets/portfolio_item.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PortfolioProjectScreen extends StatelessWidget {
   const PortfolioProjectScreen({super.key});
@@ -34,7 +33,10 @@ class PortfolioProjectScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 52
+                  : 16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +47,7 @@ class PortfolioProjectScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: ButtonPlain(
-                        onPressed: () => context.pop(),
+                        onPressed: () => Navigator.of(context).pop(),
                         width: 30,
                         child: Icon(
                           Icons.chevron_left,
@@ -82,8 +84,7 @@ class PortfolioProjectScreen extends StatelessWidget {
                 ),
                 Gap(8),
                 Text(
-                  """ntroducing [Project Name] UI: Elevating User Experience to New Heights
-Immerse yourself in a seamless and visually stunning experience with the [Project Name] UI – a cutting-edge interface designed to redefine user interaction. Our project boasts an intuitive design that effortlessly blends form and function, ensuring a user-friendly journey from start to finish.""",
+                  """ntroducing [Project Name] UI: Elevating User Experience to New Heights Immerse yourself in a seamless and visually stunning experience with the [Project Name] UI – a cutting-edge interface designed to redefine user interaction. Our project boasts an intuitive design that effortlessly blends form and function, ensuring a user-friendly journey from start to finish.""",
                   style: normal16.copyWith(color: mainColor),
                 ),
                 Gap(16),
@@ -123,9 +124,12 @@ Immerse yourself in a seamless and visually stunning experience with the [Projec
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   clipBehavior: Clip.none,
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+                  crossAxisCount:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 4
+                          : 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
                   itemBuilder: (BuildContext context, int index) {
                     return PortfolioItem(
                       onTap: () => context.go(portfolioProjectRoute),

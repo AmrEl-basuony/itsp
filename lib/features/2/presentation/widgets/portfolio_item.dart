@@ -15,6 +15,7 @@ class PortfolioItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardPlain(
       onTap: onTap,
+      borderRadius: 8,
       margin: EdgeInsets.all(0),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

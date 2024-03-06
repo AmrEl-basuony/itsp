@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
@@ -12,22 +13,20 @@ class ReelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width *
-              (ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 0.4
-                  : 0.75)),
-      child: Card(
-        margin: EdgeInsets.all(8),
-        elevation: 10,
-        surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: IntrinsicHeight(
+    return SizedBox(
+      width: MediaQuery.of(context).size.width *
+          (ResponsiveBreakpoints.of(context).largerThan(MOBILE) ? 0.4 : 0.75),
+      child: AspectRatio(
+        aspectRatio: 26 / 24,
+        child: Card(
+          margin: EdgeInsets.all(8),
+          elevation: 10,
+          surfaceTintColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,13 +38,15 @@ class ReelCard extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: AspectRatio(
-                              aspectRatio: 16 / 9,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  portfolioAssetPNG,
-                                  fit: BoxFit.fitWidth,
+                            child: Center(
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    portfolioAssetPNG,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ),
@@ -68,11 +69,13 @@ class ReelCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Mohamed El-hossiny',
-                      style: semiBold14.copyWith(color: mainColor),
+                    Flexible(
+                      child: Text(
+                        'Mohamed El-hossiny',
+                        style: semiBold14.copyWith(color: mainColor),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    Spacer(),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                       decoration: BoxDecoration(
@@ -82,16 +85,17 @@ class ReelCard extends StatelessWidget {
                         "Tech Category",
                         style: medium8,
                       ),
-                    )
+                    ),
                   ],
                 ),
-                Gap(8),
+                Spacer(),
                 Text(
                   'Lorem ipsum dolor sit amet consectetur. Nulla felis consectetur aliquet neque condimentum non. Sed sagittis libero ',
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: normal10.copyWith(color: mainColor),
                 ),
+                Spacer(),
               ],
             ),
           ),

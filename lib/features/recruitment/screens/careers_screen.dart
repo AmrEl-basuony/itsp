@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
@@ -14,8 +12,8 @@ import 'package:itsp/features/2/presentation/widgets/card_plain.dart';
 import 'package:itsp/core/shared/widgets/gradient_button.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
 
-class JobsScreen extends StatelessWidget {
-  const JobsScreen({super.key});
+class CareersScreen extends StatelessWidget {
+  const CareersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class JobsScreen extends StatelessWidget {
                     Row(
                       children: [
                         ButtonPlain(
-                          onPressed: () => context.pop(),
+                          onPressed: () => Navigator.of(context).pop(),
                           width: 30,
                           color: backButtonColor,
                           child: Icon(
