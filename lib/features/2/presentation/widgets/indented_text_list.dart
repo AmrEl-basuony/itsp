@@ -27,6 +27,7 @@ class IndentedTextList extends StatelessWidget {
                   child: Text(
                     "${textList[index]}",
                     style: normal16.copyWith(color: mainColor),
+                    overflow: TextOverflow.visible,
                   ),
                 ),
               ],

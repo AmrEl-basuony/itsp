@@ -25,7 +25,7 @@ class ContactScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
                   horizontal:
                       ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                          ? 52
+                          ? 32
                           : 16)
               .copyWith(top: 8),
           child: SingleChildScrollView(
@@ -99,7 +99,6 @@ class ContactScreen extends StatelessWidget {
                               ? showBigThanksDialog(context)
                               : showThanksDialog(context);
                         },
-                        height: null,
                         visualDensity: VisualDensity.comfortable,
                         child: Text(
                           'Send Messages',

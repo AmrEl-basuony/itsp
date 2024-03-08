@@ -21,7 +21,7 @@ class ReelsScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
                   horizontal:
                       ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                          ? 52
+                          ? 32
                           : 16)
               .copyWith(top: 8),
           child: SingleChildScrollView(

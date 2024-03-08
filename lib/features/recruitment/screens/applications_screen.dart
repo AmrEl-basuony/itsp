@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/routing/routes.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/card_plain.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:itsp/features/recruitment/screens/application_details_screen.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ApplicationsScreen extends StatelessWidget {
   const ApplicationsScreen({super.key});
@@ -33,22 +33,17 @@ class ApplicationsScreen extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(
+                    horizontal:
+                        ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                            ? 36
+                            : 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(8),
                     Row(
-                      children: [
-                        ButtonPlain(
-                          onPressed: () => context.pop(),
-                          width: 30,
-                          color: backButtonColor,
-                          child: Icon(
-                            Icons.chevron_left,
-                            color: mainColor,
-                          ),
-                        ),
+                      children: [CustomBackButton(),
                         Gap(8),
                         SectionTitle(title: 'UI UX Designer'),
                       ],
@@ -72,17 +67,14 @@ class ApplicationsScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Flexible(
-                                          child: AspectRatio(
-                                            aspectRatio: 1,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              child: Image.asset(
-                                                person1AssetPNG,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.asset(
+                                            person1AssetPNG,
+                                            height: 75,
+                                            width: 75,
+                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                         Gap(16),
@@ -207,8 +199,10 @@ class ApplicationsScreen extends StatelessWidget {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () =>
-                                    context.push(applicationDetailsRoute),
+                                onTap: () => pushNewScreen(
+                                  context,
+                                  screen: ApplicationDetailsScreen(),
+                                ),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 8),
                                   decoration: BoxDecoration(

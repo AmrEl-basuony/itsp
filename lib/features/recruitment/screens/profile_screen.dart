@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_dropdown.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
@@ -31,7 +32,6 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     SectionTitle(title: 'Profile'),
                     GradientButton(
-                      height: null,
                       onPressed: () {},
                       visualDensity: VisualDensity.comfortable,
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -165,7 +165,6 @@ class ProfileScreen extends StatelessWidget {
                     margin: EdgeInsets.only(right: 8),
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     onPressed: () {},
-                    height: null,
                     child: Text(
                       'Update CV',
                       style: medium14,
@@ -182,7 +181,6 @@ class ProfileScreen extends StatelessWidget {
                           Expanded(
                             child: GradientButton(
                               onPressed: () {},
-                              height: null,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: Text(
                                 'Save',
@@ -194,7 +192,6 @@ class ProfileScreen extends StatelessWidget {
                           Expanded(
                             child: GradientOutlinedButton(
                               onPressed: () {},
-                              height: null,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: Text(
                                 'Cancel',
@@ -207,7 +204,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(32),
+                Gap(navBarHeight),
               ],
             ),
           ),

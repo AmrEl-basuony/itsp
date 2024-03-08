@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/routing/routes.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/features/2/presentation/widgets/carousel_with_main_image.dart';
 import 'package:itsp/features/2/presentation/widgets/indented_text_list.dart';
 import 'package:itsp/features/2/presentation/widgets/portfolio_item.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PortfolioProjectScreen extends StatelessWidget {
@@ -35,7 +34,7 @@ class PortfolioProjectScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 52
+                  ? 32
                   : 16),
           child: SingleChildScrollView(
             child: Column(
@@ -46,14 +45,7 @@ class PortfolioProjectScreen extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: ButtonPlain(
-                        onPressed: () => Navigator.of(context).pop(),
-                        width: 30,
-                        child: Icon(
-                          Icons.chevron_left,
-                          color: mainColor,
-                        ),
-                      ),
+                      child: CustomBackButton(),
                     ),
                     Gap(8),
                     CircleAvatar(
@@ -86,6 +78,7 @@ class PortfolioProjectScreen extends StatelessWidget {
                 Text(
                   """ntroducing [Project Name] UI: Elevating User Experience to New Heights Immerse yourself in a seamless and visually stunning experience with the [Project Name] UI – a cutting-edge interface designed to redefine user interaction. Our project boasts an intuitive design that effortlessly blends form and function, ensuring a user-friendly journey from start to finish.""",
                   style: normal16.copyWith(color: mainColor),
+                  overflow: TextOverflow.visible,
                 ),
                 Gap(16),
                 Text(
@@ -132,7 +125,10 @@ class PortfolioProjectScreen extends StatelessWidget {
                   mainAxisSpacing: 16,
                   itemBuilder: (BuildContext context, int index) {
                     return PortfolioItem(
-                      onTap: () => context.go(portfolioProjectRoute),
+                      onTap: () => pushNewScreen(
+                        context,
+                        screen: PortfolioProjectScreen(),
+                      ),
                     );
                   },
                 ),

@@ -6,8 +6,6 @@ class GradientButton extends StatelessWidget {
     required this.onPressed,
     this.padding = const EdgeInsets.all(0),
     this.margin,
-    this.height,
-    this.width,
     this.gradient = lightLinearGradient,
     this.visualDensity = VisualDensity.compact,
     this.radius = 8,
@@ -17,7 +15,6 @@ class GradientButton extends StatelessWidget {
   final Widget? child;
   final void Function()? onPressed;
   final EdgeInsetsGeometry? padding, margin;
-  final double? height, width;
   final Gradient? gradient;
   final VisualDensity? visualDensity;
   final double radius;
@@ -37,7 +34,6 @@ class GradientButton extends StatelessWidget {
           foregroundColor: Colors.white,
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
-          minimumSize: Size(width ?? 0, height ?? 0),
           padding: padding,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius)),

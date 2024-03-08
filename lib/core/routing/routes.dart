@@ -1,3 +1,4 @@
+const String splashRoute = '/splash';
 const String onBoardingRoute = '/onboarding';
 
 const String mainLayoutRoute = '/mainLayout';

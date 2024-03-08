@@ -22,7 +22,7 @@ class PortfolioScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(
                   horizontal:
                       ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                          ? 52
+                          ? 32
                           : 16)
               .copyWith(top: 8),
           child: SingleChildScrollView(
@@ -34,6 +34,7 @@ class PortfolioScreen extends StatelessWidget {
                 Text(
                   'Have a project in mind that you think we’d be a great fit for it? We’d love to know what you’re thinking',
                   style: normal16.copyWith(color: categoriesTextColor),
+                  overflow: TextOverflow.visible,
                 ),
                 Gap(16),
                 AlignedGridView.count(
@@ -49,10 +50,10 @@ class PortfolioScreen extends StatelessWidget {
                   mainAxisSpacing: 16,
                   itemBuilder: (BuildContext context, int index) {
                     return PortfolioItem(
-                      onTap: () =>   pushNewScreen(
-                            context,
-                            screen: PortfolioProjectScreen(),
-                          ),
+                      onTap: () => pushNewScreen(
+                        context,
+                        screen: PortfolioProjectScreen(),
+                      ),
                     );
                   },
                 ),

@@ -15,6 +15,7 @@ import 'package:itsp/core/shared/widgets/gradient_button.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_card.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card_plain.dart';
+import 'package:itsp/features/2/presentation/widgets/gradient_category_card_plain_wide.dart';
 import 'package:itsp/features/2/presentation/widgets/gradient_category_card_wide.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/features/2/presentation/widgets/portfolio_card.dart';
@@ -77,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: ResponsiveBreakpoints.of(context)
                                       .largerThan(MOBILE)
-                                  ? 52
+                                  ? 32
                                   : 16),
                           child: Text(
                             'Careers',
@@ -93,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: ResponsiveBreakpoints.of(context)
                                       .largerThan(MOBILE)
-                                  ? 52
+                                  ? 32
                                   : 16),
                           child: Text(
                             'About Us',
@@ -109,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: ResponsiveBreakpoints.of(context)
                                       .largerThan(MOBILE)
-                                  ? 52
+                                  ? 32
                                   : 16),
                           child: Text(
                             'Resources',
@@ -162,32 +163,56 @@ class HomeScreen extends StatelessWidget {
                 SectionTitle(title: 'Our Solutions'),
                 Row(
                   children: [
-                    GradientCategoryCard(
-                      text: 'Software House',
-                      icon: FontAwesomeIcons.code,
-                      onTap: () => pushNewScreen(
-                        context,
-                        screen: SoftwareHouseCategoryScreen(),
+                    if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
+                      GradientCategoryCard(
+                        text: 'Software House',
+                        icon: FontAwesomeIcons.code,
+                        onTap: () => pushNewScreen(
+                          context,
+                          screen: SoftwareHouseCategoryScreen(),
+                        ),
                       ),
-                    ),
+                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
+                      Flexible(
+                        child: GradientCategoryCardWide(
+                          text: 'Software House',
+                          icon: FontAwesomeIcons.code,
+                          onTap: () => pushNewScreen(
+                            context,
+                            screen: SoftwareHouseCategoryScreen(),
+                          ),
+                        ),
+                      ),
                     Gap(8),
-                    GradientCategoryCardPlain(
-                      text: 'Marketing & Business House',
-                      icon: FontAwesomeIcons.award,
-                      onTap: () => pushNewScreen(
-                        context,
-                        screen: MarketingAndBusinessHouseCategoryScreen(),
+                    if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
+                      GradientCategoryCardPlain(
+                        text: 'Marketing & Business House',
+                        icon: FontAwesomeIcons.award,
+                        onTap: () => pushNewScreen(
+                          context,
+                          screen: MarketingAndBusinessHouseCategoryScreen(),
+                        ),
                       ),
-                    ),
+                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
+                      GradientCategoryCardPlainWide(
+                        text: 'Marketing & Business House',
+                        icon: FontAwesomeIcons.award,
+                        onTap: () => pushNewScreen(
+                          context,
+                          screen: MarketingAndBusinessHouseCategoryScreen(),
+                        ),
+                      ),
                     if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
                       Gap(8),
                     if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
-                      GradientCategoryCard(
-                        text: 'Digital Marketing House',
-                        icon: FontAwesomeIcons.envelopeOpen,
-                        onTap: () => pushNewScreen(
-                          context,
-                          screen: DigitalMarketingCategoryScreen(),
+                      Flexible(
+                        child: GradientCategoryCardWide(
+                          text: 'Digital Marketing House',
+                          icon: FontAwesomeIcons.envelopeOpen,
+                          onTap: () => pushNewScreen(
+                            context,
+                            screen: DigitalMarketingCategoryScreen(),
+                          ),
                         ),
                       ),
                   ],
@@ -198,6 +223,7 @@ class HomeScreen extends StatelessWidget {
                   GradientCategoryCardWide(
                     text: 'Digital Marketing House',
                     icon: FontAwesomeIcons.envelopeOpen,
+
                     onTap: () => pushNewScreen(
                       context,
                       screen: DigitalMarketingCategoryScreen(),

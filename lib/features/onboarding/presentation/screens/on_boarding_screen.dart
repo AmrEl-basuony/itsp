@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -76,6 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 loremText,
                                 style: semiBold14,
                                 textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
                               ),
                             ],
                           ),
@@ -98,6 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 loremText,
                                 style: semiBold14,
                                 textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
                               ),
                             ],
                           ),
@@ -120,6 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 loremText,
                                 style: semiBold14,
                                 textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
                               ),
                             ],
                           ),

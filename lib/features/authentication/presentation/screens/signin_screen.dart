@@ -6,9 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
 import 'package:itsp/core/routing/routes.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
 import 'package:itsp/core/theming/colors.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/core/shared/widgets/gradient_button.dart';
@@ -27,15 +27,7 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Gap(8),
-                ButtonPlain(
-                  onPressed: () => context.pop(),
-                  width: 30,
-                  child: Icon(
-                    Icons.chevron_left,
-                    color: mainColor,
-                  ),
-                ),
+                Gap(8),CustomBackButton(),
                 Gap(80),
                 GradientShaderMask(
                   child: SvgPicture.asset(
@@ -93,7 +85,6 @@ class SignInScreen extends StatelessWidget {
                     Expanded(
                       child: GradientButton(
                         onPressed: () {},
-                        height: null,
                         visualDensity: VisualDensity.comfortable,
                         child: Text(
                           'Login',

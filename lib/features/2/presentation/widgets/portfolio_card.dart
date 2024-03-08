@@ -57,7 +57,6 @@ class PortfolioCard extends StatelessWidget {
                 Gap(8),
                 Spacer(),
                 GradientButton(
-                  height: 1,
                   onPressed: () {},
                   child: Text(
                     'More Details',

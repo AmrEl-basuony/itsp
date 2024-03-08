@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
@@ -42,16 +42,7 @@ class ResourcesScreen extends StatelessWidget {
                         children: [
                           Gap(24),
                           Row(
-                            children: [
-                              ButtonPlain(
-                                onPressed: () => Navigator.of(context).pop(),
-                                width: 30,
-                                color: backButtonColor,
-                                child: Icon(
-                                  Icons.chevron_left,
-                                  color: mainColor,
-                                ),
-                              ),
+                            children: [CustomBackButton(),
                               Gap(8),
                               Text(
                                 'Resources',

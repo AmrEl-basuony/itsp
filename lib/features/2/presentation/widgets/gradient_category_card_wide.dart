@@ -32,8 +32,6 @@ class GradientCategoryCardWide extends StatelessWidget {
                 Text(
                   text,
                   style: medium11,
-                  maxLines: 2,
-                  softWrap: true,
                 ),
                 Gap(16),
                 Row(

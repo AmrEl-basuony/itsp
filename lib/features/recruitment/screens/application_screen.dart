@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -48,16 +45,7 @@ class ApplicationScreen extends StatelessWidget {
                     children: [
                       Gap(8),
                       Row(
-                        children: [
-                          ButtonPlain(
-                            onPressed: () => context.pop(),
-                            width: 30,
-                            color: backButtonColor,
-                            child: Icon(
-                              Icons.chevron_left,
-                              color: mainColor,
-                            ),
-                          ),
+                        children: [CustomBackButton(),
                           Gap(8),
                           SectionTitle(title: 'Ui UX Designer'),
                         ],
@@ -236,7 +224,6 @@ class ApplicationScreen extends StatelessWidget {
                                               cubit.changeIndex(1);
                                             }
                                           : () {},
-                                      height: null,
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 16),
                                       child: Text(

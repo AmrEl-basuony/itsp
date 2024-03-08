@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
 import 'package:itsp/features/recruitment/widgets/info_row.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ApplicationDetailsScreen extends StatelessWidget {
   const ApplicationDetailsScreen({super.key});
@@ -33,24 +32,20 @@ class ApplicationDetailsScreen extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(
+                    horizontal:
+                        ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                            ? 36
+                            : 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(8),
                     Row(
                       children: [
-                        ButtonPlain(
-                          onPressed: () => context.pop(),
-                          width: 30,
-                          color: backButtonColor,
-                          child: Icon(
-                            Icons.chevron_left,
-                            color: mainColor,
-                          ),
-                        ),
+                        CustomBackButton(),
                         Gap(8),
-                        SectionTitle(title: 'Track applications'),
+                        SectionTitle(title: 'UI UX Designer'),
                       ],
                     ),
                     Gap(24),
@@ -94,9 +89,7 @@ class ApplicationDetailsScreen extends StatelessWidget {
                     Gap(16),
                     InfoRow(
                       lableLeft: 'Cv',
-                      lableRight: '',
                       subLableLeft: 'Zeyad abdelazim CV.pdf',
-                      subLableRight: '',
                     ),
                     Gap(16),
                     Text(
@@ -106,10 +99,32 @@ class ApplicationDetailsScreen extends StatelessWidget {
                     Gap(16),
                     InfoRow(
                       lableLeft: 'Years of Exp.?',
-                      lableRight: '',
                       subLableLeft: '99+',
-                      subLableRight: '',
                     ),
+                    Gap(16),
+                    InfoRow(
+                      lableLeft: 'what is you noticed period?',
+                      subLableLeft: '2 weeks',
+                    ),
+                    Gap(16),
+                    InfoRow(
+                      lableLeft:
+                          'What is your current monthly salary in local currency?',
+                      subLableLeft: '20000',
+                    ),
+                    Gap(16),
+                    InfoRow(
+                      lableLeft: 'what is you noticed period?',
+                      subLableLeft:
+                          'Ensure accuracy, completeness, and compliance of financial data.',
+                    ),
+                    Gap(16),
+                    InfoRow(
+                      lableLeft: 'what is you noticed period?',
+                      subLableLeft:
+                          'Ensure accuracy, completeness, and compliance of financial data,Ensure accuracy, completeness, and compliance of financial data.',
+                    ),
+                    Gap(16),
                   ],
                 ),
               ),

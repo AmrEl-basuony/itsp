@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:itsp/core/contants.dart';
-import 'package:itsp/core/routing/routes.dart';
-import 'package:itsp/core/shared/widgets/button_plain.dart';
+import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_dropdown.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
 import 'package:itsp/core/theming/colors.dart';
@@ -11,6 +10,11 @@ import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/widgets/card_plain.dart';
 import 'package:itsp/core/shared/widgets/gradient_button.dart';
 import 'package:itsp/features/2/presentation/widgets/section_title.dart';
+import 'package:itsp/features/recruitment/screens/applications_screen.dart';
+import 'package:itsp/features/recruitment/screens/job_details_screen.dart';
+import 'package:itsp/features/recruitment/widgets/job_details_card.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CareersScreen extends StatelessWidget {
   const CareersScreen({super.key});
@@ -21,7 +25,10 @@ class CareersScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                  ? 36
+                  : 16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,23 +38,16 @@ class CareersScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: [
-                        ButtonPlain(
-                          onPressed: () => Navigator.of(context).pop(),
-                          width: 30,
-                          color: backButtonColor,
-                          child: Icon(
-                            Icons.chevron_left,
-                            color: mainColor,
-                          ),
-                        ),
+                      children: [CustomBackButton(),
                         Gap(8),
                         SectionTitle(title: 'Careers'),
                       ],
                     ),
                     GradientButton(
-                      height: null,
-                      onPressed: () => context.push(applicationsRoute),
+                      onPressed: () => pushNewScreen(
+                        context,
+                        screen: ApplicationsScreen(),
+                      ),
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         'Applications',
@@ -60,6 +60,7 @@ class CareersScreen extends StatelessWidget {
                 Text(
                   'Code, Market, Innovate. Make a global impact. Join our team!',
                   style: normal16.copyWith(color: categoriesTextColor),
+                  maxLines: 2,
                 ),
                 Gap(16),
                 TextFieldWithTitle(
@@ -67,7 +68,7 @@ class CareersScreen extends StatelessWidget {
                   hintText: 'Search by job title',
                   suffix: GradientButton(
                     onPressed: () {},
-                    child: Icon(Icons.search),
+                    child: FaIcon(FontAwesomeIcons.magnifyingGlass),
                   ),
                 ),
                 Gap(16),
@@ -113,77 +114,36 @@ class CareersScreen extends StatelessWidget {
                   ],
                 ),
                 Gap(16),
-                SectionTitle(title: 'Choose category'),
+                SectionTitle(title: 'Choose Job'),
                 Gap(16),
-                ListView.builder(
-                  itemCount: 3,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  clipBehavior: Clip.none,
-                  itemBuilder: (context, index) {
-                    return CardPlain(
-                      margin: EdgeInsets.all(0).copyWith(bottom: 16),
-                      onTap: () => context.push(jobDetailsRoute),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(16.0).copyWith(bottom: 8),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(4),
-                                      child: Image.asset(
-                                        portfolioAssetPNG,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Gap(8),
-                                Flexible(
-                                  flex: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'software house',
-                                        style:
-                                            medium16.copyWith(color: mainColor),
-                                      ),
-                                      Text(
-                                        'Lorem ipsum dolor sit amet consectetur. Nulla felis consec non. Sed sagittis libero ',
-                                        style:
-                                            normal12.copyWith(color: mainColor),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                    ? AlignedGridView.count(
+                        itemCount: 7,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        clipBehavior: Clip.none,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        itemBuilder: (BuildContext context, int index) =>
+                            JobDetailsCard(),
+                      )
+                    : ListView.builder(
+                        itemCount: 3,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        clipBehavior: Clip.none,
+                        itemBuilder: (context, index) {
+                          return CardPlain(
+                            margin: EdgeInsets.all(0).copyWith(bottom: 16),
+                            onTap: () => pushNewScreen(
+                              context,
+                              screen: JobDetailsScreen(),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            decoration: BoxDecoration(
-                                gradient: lightLinearGradient,
-                                borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(8))),
-                            child: Center(
-                              child: Text(
-                                'View all available jobs',
-                                style: normal14,
-                              ),
-                            ),
-                          ),
-                        ],
+                            child: JobDetailsCard(),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
                 Gap(32),
               ],
             ),

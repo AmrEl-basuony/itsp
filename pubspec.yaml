@@ -27,12 +27,14 @@ dependencies:
   dropdown_button2: ^2.3.9
   file_picker: ^6.1.1
   font_awesome_flutter: ^10.7.0
+  share_plus: ^7.2.2
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_native_splash: ^2.3.13
 
 flutter:
   uses-material-design: true
@@ -59,3 +61,12 @@ flutter:
         - asset: assets/fonts/Poppins-SemiBold.ttf
         - asset: assets/fonts/Poppins-SemiBoldItalic.ttf
         - asset: assets/fonts/Poppins-ThinItalic.ttf
+
+flutter_native_splash:
+  web: false
+  background_image: "assets/imgs/splash_background.png"
+  image: assets/imgs/logo.png
+  android_12:
+    background_image: "assets/imgs/splash_background.png"
+    image: assets/imgs/logo.png
+    icon_background_color: "#081986"
