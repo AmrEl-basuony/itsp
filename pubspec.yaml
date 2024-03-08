@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  retrofit: ^4.1.0
+  dio_smart_retry: ^6.0.0
+  pretty_dio_logger: ^1.3.1
+  get_it: ^7.6.7
   go_router: ^13.2.0
   flutter_bloc: ^8.1.4
   responsive_framework: ^1.4.0
@@ -35,6 +39,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.0
   flutter_native_splash: ^2.3.13
+  retrofit_generator: ^8.1.0
+  build_runner: ^2.4.8
 
 flutter:
   uses-material-design: true
@@ -65,8 +71,9 @@ flutter:
 flutter_native_splash:
   web: false
   background_image: "assets/imgs/splash_background.png"
-  image: assets/imgs/logo.png
-  android_12:
-    background_image: "assets/imgs/splash_background.png"
-    image: assets/imgs/logo.png
+  image: assets/imgs/handshake.png
+  android_gravity: fill_horizontal
+  ios_content_mode: scaleAspectFit
+  android_12: 
+    image: assets/imgs/handshake.png
     icon_background_color: "#081986"
