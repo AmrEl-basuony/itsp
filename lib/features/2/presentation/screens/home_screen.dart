@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
+import 'package:itsp/core/shared/blocs/appTheme/app_theme_cubit.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
 import 'package:itsp/features/2/presentation/screens/about_us_screen.dart';
@@ -31,263 +33,274 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 32
-                  : 16),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(8),
-                GradientShaderMask(
-                  child: SvgPicture.asset(
-                    logoAssetSVG,
-                    height: 25,
-                  ),
-                ),
-                Gap(16),
-                Center(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<AppThemeCubit, AppThemeState>(
+      builder: (context, state) {
+        AppThemeCubit appThemeCubit = AppThemeCubit.getInstance(context);
+
+        return Scaffold(
+          backgroundColor:
+              appThemeCubit.isLight ? backgroundColor : darkModeColor,
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 32
+                          : 16),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(8),
+                    GradientShaderMask(
+                      linearGradient: appThemeCubit.isLight
+                          ? lightLinearGradient
+                          : solidWhiteGradient,
+                      child: SvgPicture.asset(
+                        logoAssetSVG,
+                        height: 25,
+                      ),
+                    ),
+                    Gap(16),
+                    Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GradientButton(
+                              onPressed: appThemeCubit.changeTheme,
+                              padding: EdgeInsets.all(
+                                  ResponsiveBreakpoints.of(context)
+                                          .largerThan(MOBILE)
+                                      ? 16
+                                      : 0),
+                              child: const FaIcon(
+                                FontAwesomeIcons.lightbulb,
+                                size: 14,
+                              ),
+                            ),
+                            Gap(16),
+                            GradientButton(
+                              onPressed: () => pushNewScreen(
+                                context,
+                                screen: CareersScreen(),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ResponsiveBreakpoints.of(context)
+                                          .largerThan(MOBILE)
+                                      ? 32
+                                      : 16),
+                              child: Text(
+                                'Careers',
+                                style: normal12,
+                              ),
+                            ),
+                            Gap(16),
+                            GradientButton(
+                              onPressed: () => pushNewScreen(
+                                context,
+                                screen: AboutUsScreen(),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ResponsiveBreakpoints.of(context)
+                                          .largerThan(MOBILE)
+                                      ? 32
+                                      : 16),
+                              child: Text(
+                                'About Us',
+                                style: normal12,
+                              ),
+                            ),
+                            Gap(16),
+                            GradientButton(
+                              onPressed: () => pushNewScreen(
+                                context,
+                                screen: ResourcesScreen(),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ResponsiveBreakpoints.of(context)
+                                          .largerThan(MOBILE)
+                                      ? 32
+                                      : 16),
+                              child: Text(
+                                'Resources',
+                                style: normal12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Gap(8),
+                    Stack(
+                      alignment: Alignment.centerRight,
                       children: [
-                        GradientButton(
-                          onPressed: () {},
-                          padding: EdgeInsets.all(
-                              ResponsiveBreakpoints.of(context)
-                                      .largerThan(MOBILE)
-                                  ? 16
-                                  : 0),
-                          child: const FaIcon(
-                            FontAwesomeIcons.lightbulb,
-                            size: 14,
+                        GradientCard(
+                          margin: EdgeInsets.all(0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        homeCardTextStart,
+                                        style: bold12,
+                                      ),
+                                      RichText(
+                                        maxLines: 3,
+                                        softWrap: true,
+                                        text: TextSpan(
+                                          text: homeCardText,
+                                          style: normal12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Image.asset(phoneSmallAssetPNG),
+                            ],
                           ),
                         ),
-                        Gap(16),
-                        GradientButton(
-                          onPressed: () => pushNewScreen(
-                            context,
-                            screen: CareersScreen(),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ResponsiveBreakpoints.of(context)
-                                      .largerThan(MOBILE)
-                                  ? 32
-                                  : 16),
-                          child: Text(
-                            'Careers',
-                            style: normal12,
-                          ),
-                        ),
-                        Gap(16),
-                        GradientButton(
-                          onPressed: () => pushNewScreen(
-                            context,
-                            screen: AboutUsScreen(),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ResponsiveBreakpoints.of(context)
-                                      .largerThan(MOBILE)
-                                  ? 32
-                                  : 16),
-                          child: Text(
-                            'About Us',
-                            style: normal12,
-                          ),
-                        ),
-                        Gap(16),
-                        GradientButton(
-                          onPressed: () => pushNewScreen(
-                            context,
-                            screen: ResourcesScreen(),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ResponsiveBreakpoints.of(context)
-                                      .largerThan(MOBILE)
-                                  ? 32
-                                  : 16),
-                          child: Text(
-                            'Resources',
-                            style: normal12,
-                          ),
-                        ),
+                        Image.asset(phoneAssetPNG),
                       ],
                     ),
-                  ),
-                ),
-                Gap(8),
-                Stack(
-                  alignment: Alignment.centerRight,
-                  children: [
-                    GradientCard(
-                      margin: EdgeInsets.all(0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                    SectionTitle(title: 'Our Solutions'),
+                    Row(
+                      children: [
+                        if (ResponsiveBreakpoints.of(context)
+                            .smallerThan(TABLET))
+                          GradientCategoryCard(
+                            text: 'Software House',
+                            icon: FontAwesomeIcons.code,
+                            onTap: () => pushNewScreen(
+                              context,
+                              screen: SoftwareHouseCategoryScreen(),
+                            ),
+                          ),
+                        if (ResponsiveBreakpoints.of(context)
+                            .largerThan(MOBILE))
                           Flexible(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    homeCardTextStart,
-                                    style: bold12,
-                                  ),
-                                  RichText(
-                                    maxLines: 3,
-                                    softWrap: true,
-                                    text: TextSpan(
-                                      text: homeCardText,
-                                      style: normal12,
-                                    ),
-                                  ),
-                                ],
+                            child: GradientCategoryCardWide(
+                              text: 'Software House',
+                              icon: FontAwesomeIcons.code,
+                              onTap: () => pushNewScreen(
+                                context,
+                                screen: SoftwareHouseCategoryScreen(),
                               ),
                             ),
                           ),
-                          Image.asset(phoneSmallAssetPNG),
-                        ],
-                      ),
+                        Gap(8),
+                        if (ResponsiveBreakpoints.of(context)
+                            .smallerThan(TABLET))
+                          GradientCategoryCardPlain(
+                            text: 'Marketing & Business House',
+                            icon: FontAwesomeIcons.award,
+                            onTap: () => pushNewScreen(
+                              context,
+                              screen: MarketingAndBusinessHouseCategoryScreen(),
+                            ),
+                          ),
+                        if (ResponsiveBreakpoints.of(context)
+                            .largerThan(MOBILE))
+                          GradientCategoryCardPlainWide(
+                            text: 'Marketing & Business House',
+                            icon: FontAwesomeIcons.award,
+                            onTap: () => pushNewScreen(
+                              context,
+                              screen: MarketingAndBusinessHouseCategoryScreen(),
+                            ),
+                          ),
+                        if (ResponsiveBreakpoints.of(context)
+                            .largerThan(MOBILE))
+                          Gap(8),
+                        if (ResponsiveBreakpoints.of(context)
+                            .largerThan(MOBILE))
+                          Flexible(
+                            child: GradientCategoryCardWide(
+                              text: 'Digital Marketing House',
+                              icon: FontAwesomeIcons.envelopeOpen,
+                              onTap: () => pushNewScreen(
+                                context,
+                                screen: DigitalMarketingCategoryScreen(),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                    Image.asset(phoneAssetPNG),
-                  ],
-                ),
-                SectionTitle(title: 'Our Solutions'),
-                Row(
-                  children: [
                     if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
-                      GradientCategoryCard(
-                        text: 'Software House',
-                        icon: FontAwesomeIcons.code,
+                      Gap(8),
+                    if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
+                      GradientCategoryCardWide(
+                        text: 'Digital Marketing House',
+                        icon: FontAwesomeIcons.envelopeOpen,
                         onTap: () => pushNewScreen(
                           context,
-                          screen: SoftwareHouseCategoryScreen(),
-                        ),
-                      ),
-                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
-                      Flexible(
-                        child: GradientCategoryCardWide(
-                          text: 'Software House',
-                          icon: FontAwesomeIcons.code,
-                          onTap: () => pushNewScreen(
-                            context,
-                            screen: SoftwareHouseCategoryScreen(),
-                          ),
+                          screen: DigitalMarketingCategoryScreen(),
                         ),
                       ),
                     Gap(8),
-                    if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
-                      GradientCategoryCardPlain(
-                        text: 'Marketing & Business House',
-                        icon: FontAwesomeIcons.award,
-                        onTap: () => pushNewScreen(
-                          context,
-                          screen: MarketingAndBusinessHouseCategoryScreen(),
-                        ),
-                      ),
-                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
-                      GradientCategoryCardPlainWide(
-                        text: 'Marketing & Business House',
-                        icon: FontAwesomeIcons.award,
-                        onTap: () => pushNewScreen(
-                          context,
-                          screen: MarketingAndBusinessHouseCategoryScreen(),
-                        ),
-                      ),
-                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
-                      Gap(8),
-                    if (ResponsiveBreakpoints.of(context).largerThan(MOBILE))
-                      Flexible(
-                        child: GradientCategoryCardWide(
-                          text: 'Digital Marketing House',
-                          icon: FontAwesomeIcons.envelopeOpen,
-                          onTap: () => pushNewScreen(
-                            context,
-                            screen: DigitalMarketingCategoryScreen(),
+                    SectionTitleWithAllButton(title: 'Reels'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Row(
+                        children: []..addAll(
+                            List.generate(
+                              7,
+                              (index) => ReelCard(),
+                            ),
                           ),
-                        ),
                       ),
+                    ),
+                    Gap(16),
+                    SectionTitle(title: 'Expert Team'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Row(
+                        children: []..addAll(
+                            List.generate(
+                              7,
+                              (index) => ExpertTeamMemberCard(
+                                title: 'Salma MO',
+                                subTitle: 'Position: UI UX designer',
+                                body:
+                                    'Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur.',
+                              ),
+                            ),
+                          ),
+                      ),
+                    ),
+                    Gap(8),
+                    SectionTitleWithAllButton(title: 'Portfolio'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Row(
+                        children: []..addAll(
+                            List.generate(
+                              5,
+                              (index) => PortfolioCard(),
+                            ),
+                          ),
+                      ),
+                    ),
+                    Gap(navBarHeight),
                   ],
                 ),
-                if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
-                  Gap(8),
-                if (ResponsiveBreakpoints.of(context).smallerThan(TABLET))
-                  GradientCategoryCardWide(
-                    text: 'Digital Marketing House',
-                    icon: FontAwesomeIcons.envelopeOpen,
-
-                    onTap: () => pushNewScreen(
-                      context,
-                      screen: DigitalMarketingCategoryScreen(),
-                    ),
-                  ),
-                Gap(8),
-                SectionTitleWithAllButton(
-                  title: 'Reels',
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  child: Row(
-                    children: []..addAll(
-                        List.generate(
-                          7,
-                          (index) => ReelCard(),
-                        ),
-                      ),
-                  ),
-                ),
-                Gap(16),
-                SectionTitle(
-                  title: 'Expert Team',
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  child: Row(
-                    children: []..addAll(
-                        List.generate(
-                          7,
-                          (index) => ExpertTeamMemberCard(
-                            title: 'Salma MO',
-                            subTitle: 'Position: UI UX designer',
-                            body:
-                                'Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur.',
-                          ),
-                        ),
-                      ),
-                  ),
-                ),
-                Gap(8),
-                SectionTitleWithAllButton(
-                  title: 'Portfolio',
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  child: Row(
-                    children: []..addAll(
-                        List.generate(
-                          5,
-                          (index) => PortfolioCard(),
-                        ),
-                      ),
-                  ),
-                ),
-                Gap(navBarHeight),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

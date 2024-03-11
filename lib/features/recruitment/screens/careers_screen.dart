@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:itsp/core/contants.dart';
+import 'package:itsp/core/shared/blocs/appTheme/app_theme_cubit.dart';
 import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_dropdown.dart';
 import 'package:itsp/core/shared/widgets/text_field_with_title.dart';
@@ -21,135 +24,158 @@ class CareersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 36
-                  : 16),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Gap(8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<AppThemeCubit, AppThemeState>(
+      builder: (context, state) {
+        AppThemeCubit appThemeCubit = AppThemeCubit.getInstance(context);
+
+        return Scaffold(
+          backgroundColor:
+              appThemeCubit.isLight ? backgroundColor : darkModeColor,
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 36
+                          : 16),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Gap(8),
                     Row(
-                      children: [CustomBackButton(),
-                        Gap(8),
-                        SectionTitle(title: 'Careers'),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CustomBackButton(),
+                            Gap(8),
+                            SectionTitle(title: 'Careers'),
+                          ],
+                        ),
+                        GradientButton(
+                          onPressed: () => pushNewScreen(
+                            context,
+                            screen: ApplicationsScreen(),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Applications',
+                            style: normal14,
+                          ),
+                        ),
                       ],
                     ),
-                    GradientButton(
-                      onPressed: () => pushNewScreen(
-                        context,
-                        screen: ApplicationsScreen(),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Applications',
-                        style: normal14,
-                      ),
+                    Gap(24),
+                    Text(
+                      'Code, Market, Innovate. Make a global impact. Join our team!',
+                      style: normal16.copyWith(
+                          color: appThemeCubit.isLight
+                              ? categoriesTextColor
+                              : Colors.white),
+                      overflow: TextOverflow.visible,
+                      maxLines: 2,
                     ),
-                  ],
-                ),
-                Gap(24),
-                Text(
-                  'Code, Market, Innovate. Make a global impact. Join our team!',
-                  style: normal16.copyWith(color: categoriesTextColor),
-                  maxLines: 2,
-                ),
-                Gap(16),
-                TextFieldWithTitle(
-                  title: 'Job',
-                  hintText: 'Search by job title',
-                  suffix: GradientButton(
-                    onPressed: () {},
-                    child: FaIcon(FontAwesomeIcons.magnifyingGlass),
-                  ),
-                ),
-                Gap(16),
-                Row(
-                  children: [
-                    Flexible(
-                      child: TextFieldWithDropdown(
-                        titleText: 'Category',
-                        items: []..addAll(
-                            List.generate(
-                              3,
-                              (index) => DropdownMenuItem(
-                                child: Text(
-                                  'Software House',
-                                  style: normal14.copyWith(color: Colors.black),
-                                ),
-                                value: index,
-                              ),
-                            ),
-                          ),
-                        onChanged: (val) {},
+                    Gap(16),
+                    TextFieldWithTitle(
+                      title: 'Job',
+                      hintText: 'Search by job title',
+                      titleColor:
+                          appThemeCubit.isLight ? mainColor : Colors.white,
+                      suffix: GradientButton(
+                        onPressed: () {},
+                        child: FaIcon(FontAwesomeIcons.magnifyingGlass),
                       ),
                     ),
                     Gap(16),
-                    Flexible(
-                      child: TextFieldWithDropdown(
-                        titleText: 'Job Status',
-                        items: []..addAll(
-                            List.generate(
-                              3,
-                              (index) => DropdownMenuItem(
-                                child: Text(
-                                  'on site',
-                                  style: normal14.copyWith(color: Colors.black),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: TextFieldWithDropdown(
+                            titleColor: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white,
+                            titleText: 'Category',
+                            items: []..addAll(
+                                List.generate(
+                                  3,
+                                  (index) => DropdownMenuItem(
+                                    child: Text(
+                                      'Software House',
+                                      style: normal14.copyWith(
+                                          color: Colors.black),
+                                    ),
+                                    value: index,
+                                  ),
                                 ),
-                                value: index,
                               ),
-                            ),
+                            onChanged: (val) {},
                           ),
-                        onChanged: (val) {},
-                      ),
+                        ),
+                        Gap(16),
+                        Flexible(
+                          child: TextFieldWithDropdown(
+                            titleColor: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white,
+                            titleText: 'Job Status',
+                            items: []..addAll(
+                                List.generate(
+                                  3,
+                                  (index) => DropdownMenuItem(
+                                    child: Text(
+                                      'on site',
+                                      style: normal14.copyWith(
+                                          color: Colors.black),
+                                    ),
+                                    value: index,
+                                  ),
+                                ),
+                              ),
+                            onChanged: (val) {},
+                          ),
+                        ),
+                      ],
                     ),
+                    Gap(16),
+                    SectionTitle(title: 'Choose Job'),
+                    Gap(16),
+                    ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                        ? AlignedGridView.count(
+                            itemCount: 7,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            clipBehavior: Clip.none,
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            itemBuilder: (BuildContext context, int index) =>
+                                JobDetailsCard(),
+                          )
+                        : ListView.builder(
+                            itemCount: 3,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            clipBehavior: Clip.none,
+                            itemBuilder: (context, index) {
+                              return CardPlain(
+                                margin: EdgeInsets.all(0).copyWith(bottom: 16),
+                                onTap: () => pushNewScreen(
+                                  context,
+                                  screen: JobDetailsScreen(),
+                                ),
+                                child: JobDetailsCard(),
+                              );
+                            },
+                          ),
+                    Gap(navBarHeight),
                   ],
                 ),
-                Gap(16),
-                SectionTitle(title: 'Choose Job'),
-                Gap(16),
-                ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                    ? AlignedGridView.count(
-                        itemCount: 7,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        clipBehavior: Clip.none,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        itemBuilder: (BuildContext context, int index) =>
-                            JobDetailsCard(),
-                      )
-                    : ListView.builder(
-                        itemCount: 3,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        clipBehavior: Clip.none,
-                        itemBuilder: (context, index) {
-                          return CardPlain(
-                            margin: EdgeInsets.all(0).copyWith(bottom: 16),
-                            onTap: () => pushNewScreen(
-                              context,
-                              screen: JobDetailsScreen(),
-                            ),
-                            child: JobDetailsCard(),
-                          );
-                        },
-                      ),
-                Gap(32),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

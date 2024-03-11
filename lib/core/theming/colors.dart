@@ -38,6 +38,13 @@ final LinearGradient opaceLightLinearGradient = LinearGradient(
   ],
 );
 
+final LinearGradient opaceBlackLinearGradient = LinearGradient(
+  colors: [
+    darkModeColor.withOpacity(0.5),
+    secondDarkColor.withOpacity(0.5),
+  ],
+);
+
 final LinearGradient blueGrayLinearGradient = LinearGradient(
   colors: [
     blueGrayColor.withOpacity(0.51),
@@ -62,5 +69,19 @@ final LinearGradient darkGradient = LinearGradient(
   colors: [
     Colors.black,
     Colors.transparent,
+  ],
+);
+
+const LinearGradient solidBlackGradient = LinearGradient(
+  colors: [
+    Colors.black,
+    Colors.black,
+  ],
+);
+
+const LinearGradient solidWhiteGradient = LinearGradient(
+  colors: [
+    Colors.white,
+    Colors.white,
   ],
 );

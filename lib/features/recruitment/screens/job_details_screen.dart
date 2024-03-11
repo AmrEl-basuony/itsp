@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
+import 'package:itsp/core/shared/blocs/appTheme/app_theme_cubit.dart';
 import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_outlined_button.dart';
 import 'package:itsp/core/shared/widgets/gradient_shader_mask.dart';
@@ -19,178 +21,191 @@ class JobDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal:
-                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                          ? 36
-                          : 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gap(8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<AppThemeCubit, AppThemeState>(
+      builder: (context, state) {
+        AppThemeCubit appThemeCubit = AppThemeCubit.getInstance(context);
+
+        return Scaffold(
+          backgroundColor:
+              appThemeCubit.isLight ? backgroundColor : darkModeColor,
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                              ? 36
+                              : 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Gap(8),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomBackButton(),
-                          Gap(8),
-                          SectionTitle(title: 'Ui UX Designer'),
+                          Row(
+                            children: [
+                              CustomBackButton(),
+                              Gap(8),
+                              SectionTitle(title: 'Ui UX Designer'),
+                            ],
+                          ),
                         ],
                       ),
+                      Gap(24),
+                      Text(
+                        'Lorem ipsum dolor sit amet consectetur. Nulla felis consectetur aliquet neque condimentum non. Sed sagittis libero condimentum bibendum venenatis. Nulla feugiat ut proin facilisis in at et sit. In est semper aliquet porta ultricies. Elementum blandit sed risus amet non.',
+                        style: normal14.copyWith(
+                            color: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white),
+                        overflow: TextOverflow.visible,
+                      ),
+                      Gap(16),
+                      Wrap(
+                        spacing: 16,
+                        runSpacing: 8,
+                        children: [
+                          JobRequirmentItem(
+                            icon: Icons.shopping_bag_outlined,
+                            text: 'Junior',
+                          ),
+                          JobRequirmentItem(
+                            icon: Icons.schedule_outlined,
+                            text: 'Full-Time',
+                          ),
+                          JobRequirmentItem(
+                            icon: Icons.apartment_outlined,
+                            text: 'On Site',
+                          ),
+                          JobRequirmentItem(
+                            icon: Icons.school_outlined,
+                            text: 'computer science',
+                          ),
+                        ],
+                      ),
+                      Gap(16),
+                      GradientShaderMask(
+                        linearGradient: appThemeCubit.isLight
+                            ? lightLinearGradient
+                            : solidWhiteGradient,
+                        child: Text(
+                          'Salary range: 20000-1500000 EG',
+                          style: semiBold20,
+                        ),
+                      ),
+                      Gap(16),
                     ],
                   ),
-                  Gap(24),
-                  Text(
-                    'Lorem ipsum dolor sit amet consectetur. Nulla felis consectetur aliquet neque condimentum non. Sed sagittis libero condimentum bibendum venenatis. Nulla feugiat ut proin facilisis in at et sit. In est semper aliquet porta ultricies. Elementum blandit sed risus amet non.',
-                    style: normal14.copyWith(color: mainColor),
-                    overflow: TextOverflow.visible,
-                  ),
-                  Gap(16),
-                  Wrap(
-                    spacing: 16,
-                    runSpacing: 8,
+                ),
+                Expanded(
+                  child: Stack(
                     children: [
-                      JobRequirmentItem(
-                        icon: Icons.shopping_bag_outlined,
-                        text: 'Junior',
+                      Positioned.fill(
+                        child: Container(
+                          color: appThemeCubit.isLight ? lightGrayColor : secondDarkColor,
+                          child: SvgPicture.asset(
+                            categoriesBackgroundAssetSVG,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                      JobRequirmentItem(
-                        icon: Icons.schedule_outlined,
-                        text: 'Full-Time',
-                      ),
-                      JobRequirmentItem(
-                        icon: Icons.apartment_outlined,
-                        text: 'On Site',
-                      ),
-                      JobRequirmentItem(
-                        icon: Icons.school_outlined,
-                        text: 'computer science',
-                      ),
-                    ],
-                  ),
-                  Gap(16),
-                  GradientShaderMask(
-                    child: Text(
-                      'Salary range: 20000-1500000 EG',
-                      style: semiBold20,
-                    ),
-                  ),
-                  Gap(16),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Container(
-                      color: lightGrayColor,
-                      child: SvgPicture.asset(
-                        categoriesBackgroundAssetSVG,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(
-                        horizontal:
-                            ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                      SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ResponsiveBreakpoints.of(context)
+                                    .largerThan(MOBILE)
                                 ? 36
                                 : 16,
-                        vertical: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GradientShaderMask(
-                          child: Text(
-                            'Skills',
-                            style: semiBold24,
-                          ),
-                        ),
-                        Row(
+                            vertical: 32),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
+                            GradientShaderMask(
                               child: Text(
-                                '• Communication skills (verbal and written)',
-                                style: normal15.copyWith(color: mainColor),
-                                overflow: TextOverflow.visible,
+                                'Skills',
+                                style: semiBold24,
                               ),
                             ),
-                          ],
-                        ),
-                        Gap(16),
-                        GradientShaderMask(
-                          child: Text(
-                            'Requirements',
-                            style: semiBold24,
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Proven experience as a Senior UI/UX Designer or similar role.Proficiency in Figma and other relevant design tools. Strong portfolio showcasing a range of design projects.',
-                                style: normal15.copyWith(color: mainColor),
-                                overflow: TextOverflow.visible,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Gap(32),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: GradientButton(
-                                onPressed: () => pushNewScreen(
-                                  context,
-                                  screen: ApplicationScreen(),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    '• Communication skills (verbal and written)',
+                                    style: normal15.copyWith(color: mainColor),
+                                    overflow: TextOverflow.visible,
+                                  ),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                child: Text(
-                                  'Apply',
-                                  style: semiBold14,
-                                ),
-                              ),
+                              ],
                             ),
                             Gap(16),
-                            Expanded(
-                              child: GradientOutlinedButton(
-                                onPressed: () {},
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                child: Text(
-                                  'Share',
-                                  style: semiBold14,
-                                ),
+                            GradientShaderMask(
+                              child: Text(
+                                'Requirements',
+                                style: semiBold24,
                               ),
                             ),
-                            if (ResponsiveBreakpoints.of(context)
-                                .largerThan(MOBILE))
-                              Spacer(flex: 2),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    'Proven experience as a Senior UI/UX Designer or similar role.Proficiency in Figma and other relevant design tools.Strong portfolio showcasing a range of design projects.',
+                                    style: normal15.copyWith(color: mainColor),
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Gap(32),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GradientButton(
+                                    onPressed: () => pushNewScreen(
+                                      context,
+                                      screen: ApplicationScreen(),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    child: Text(
+                                      'Apply',
+                                      style: semiBold14,
+                                    ),
+                                  ),
+                                ),
+                                Gap(16),
+                                Expanded(
+                                  child: GradientOutlinedButton(
+                                    onPressed: () {},
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    child: Text(
+                                      'Share',
+                                      style: semiBold14,
+                                    ),
+                                  ),
+                                ),
+                                if (ResponsiveBreakpoints.of(context)
+                                    .largerThan(MOBILE))
+                                  Spacer(flex: 2),
+                              ],
+                            ),
+                            Gap(16),
                           ],
                         ),
-                        Gap(16),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

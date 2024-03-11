@@ -8,11 +8,11 @@ class GradientShaderMask extends StatelessWidget {
     super.key,
   });
   final Widget? child;
-  final LinearGradient linearGradient;
+  final LinearGradient? linearGradient;
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (Rect bounds) => linearGradient.createShader(bounds),
+      shaderCallback: (Rect bounds) => linearGradient!.createShader(bounds),
       child: child,
     );
   }

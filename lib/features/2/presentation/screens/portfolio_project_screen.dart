@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 import 'package:itsp/core/contants.dart';
+import 'package:itsp/core/shared/blocs/appTheme/app_theme_cubit.dart';
 import 'package:itsp/core/shared/widgets/back_button.dart';
 import 'package:itsp/core/theming/colors.dart';
 import 'package:itsp/core/theming/text_styles.dart';
@@ -28,116 +30,146 @@ class PortfolioProjectScreen extends StatelessWidget {
       "Responsive Design: Adaptability is key. Whether you're on a desktop, tablet, or mobile device, [Project Name] UI ensures a consistent and responsive experience, providing flexibility without compromising functionality.",
     ];
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? 32
-                  : 16),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(8),
-                Row(
+    return BlocBuilder<AppThemeCubit, AppThemeState>(
+      builder: (context, state) {
+        AppThemeCubit appThemeCubit = AppThemeCubit.getInstance(context);
+
+        return Scaffold(
+          backgroundColor:
+              appThemeCubit.isLight ? backgroundColor : darkModeColor,
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal:
+                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                          ? 32
+                          : 16),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: CustomBackButton(),
-                    ),
                     Gap(8),
-                    CircleAvatar(
-                      backgroundColor: mainColor,
-                    ),
-                    Gap(8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Text(
-                          'visit egypt project',
-                          style: bold16.copyWith(color: mainColor),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: CustomBackButton(),
                         ),
-                        Text(
-                          'loc camp',
-                          style: medium14.copyWith(color: mainColor),
+                        Gap(8),
+                        CircleAvatar(
+                          backgroundColor: mainColor,
                         ),
+                        Gap(8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'visit egypt project',
+                              style: bold16.copyWith(
+                                color: appThemeCubit.isLight
+                                    ? mainColor
+                                    : Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'loc camp',
+                              style: medium14.copyWith(
+                                color: appThemeCubit.isLight
+                                    ? mainColor
+                                    : Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-                Gap(16),
-                CarouselWithMainImage(imgList: imgList),
-                Gap(24),
-                Text(
-                  'Description:',
-                  style: semiBold20.copyWith(color: mainColor),
-                ),
-                Gap(8),
-                Text(
-                  """ntroducing [Project Name] UI: Elevating User Experience to New Heights Immerse yourself in a seamless and visually stunning experience with the [Project Name] UI – a cutting-edge interface designed to redefine user interaction. Our project boasts an intuitive design that effortlessly blends form and function, ensuring a user-friendly journey from start to finish.""",
-                  style: normal16.copyWith(color: mainColor),
-                  overflow: TextOverflow.visible,
-                ),
-                Gap(16),
-                Text(
-                  'Key Features:',
-                  style: semiBold20.copyWith(color: mainColor),
-                ),
-                Gap(8),
-                IndentedTextList(
-                  textList: textList,
-                ),
-                Gap(24),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Divider(
-                        color: mainColor,
+                    ),
+                    Gap(16),
+                    CarouselWithMainImage(imgList: imgList),
+                    Gap(24),
+                    Text(
+                      'Description:',
+                      style: semiBold20.copyWith(
+                        color: appThemeCubit.isLight ? mainColor : Colors.white,
                       ),
+                    ),
+                    Gap(8),
+                    Text(
+                      """ntroducing [Project Name] UI: Elevating User Experience to New Heights Immerse yourself in a seamless and visually stunning experience with the [Project Name] UI – a cutting-edge interface designed to redefine user interaction. Our project boasts an intuitive design that effortlessly blends form and function, ensuring a user-friendly journey from start to finish.""",
+                      style: normal16.copyWith(
+                        color: appThemeCubit.isLight ? mainColor : Colors.white,
+                      ),
+                      overflow: TextOverflow.visible,
                     ),
                     Gap(16),
                     Text(
-                      'Our Projects',
-                      textAlign: TextAlign.center,
-                      style: normal16.copyWith(color: mainColor),
+                      'Key Features:',
+                      style: semiBold20.copyWith(
+                        color: appThemeCubit.isLight ? mainColor : Colors.white,
+                      ),
+                    ),
+                    Gap(8),
+                    IndentedTextList(
+                      textList: textList,
+                    ),
+                    Gap(24),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Divider(
+                            color: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white,
+                          ),
+                        ),
+                        Gap(16),
+                        Text(
+                          'Our Projects',
+                          textAlign: TextAlign.center,
+                          style: normal16.copyWith(
+                            color: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white,
+                          ),
+                        ),
+                        Gap(16),
+                        Flexible(
+                          child: Divider(
+                            color: appThemeCubit.isLight
+                                ? mainColor
+                                : Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                     Gap(16),
-                    Flexible(
-                      child: Divider(
-                        color: mainColor,
-                      ),
+                    AlignedGridView.count(
+                      itemCount: 7,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      clipBehavior: Clip.none,
+                      crossAxisCount:
+                          ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                              ? 4
+                              : 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PortfolioItem(
+                          onTap: () => pushNewScreen(
+                            context,
+                            screen: PortfolioProjectScreen(),
+                          ),
+                        );
+                      },
                     ),
+                    Gap(navBarHeight),
                   ],
                 ),
-                Gap(16),
-                AlignedGridView.count(
-                  itemCount: 7,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  clipBehavior: Clip.none,
-                  crossAxisCount:
-                      ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                          ? 4
-                          : 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  itemBuilder: (BuildContext context, int index) {
-                    return PortfolioItem(
-                      onTap: () => pushNewScreen(
-                        context,
-                        screen: PortfolioProjectScreen(),
-                      ),
-                    );
-                  },
-                ),
-                Gap(navBarHeight),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
